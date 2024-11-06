@@ -12,6 +12,8 @@ public struct CustomCalendar: View {
     @State var monthOffset = 0
     @State private var isPickerPresented = false
     
+    public init() {}
+    
     public var body: some View {
         ZStack {
             VStack(spacing: 16) {
