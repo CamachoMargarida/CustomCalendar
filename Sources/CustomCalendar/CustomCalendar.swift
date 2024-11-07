@@ -2,7 +2,7 @@
 // https://docs.swift.org/swift-book
 import SwiftUI
 
-@available(iOS 18.0, *)
+@available(iOS 16.0, *)
 public struct CustomCalendar: View {
     @State var manager = CalenderManager(
         calendar: Calendar.current,
@@ -26,8 +26,8 @@ public struct CustomCalendar: View {
             }
             .padding()
             .background(manager.colors.backgroundColor)
-            .onChange(of: monthOffset) {
-                manager.updateCurrentDate(monthOffset: monthOffset)
+            .onChange(of: monthOffset) { offset in
+                manager.updateCurrentDate(monthOffset: offset)
             }
             
             if isPickerPresented {
