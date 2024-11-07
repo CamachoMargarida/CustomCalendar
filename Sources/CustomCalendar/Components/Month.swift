@@ -8,7 +8,7 @@ import SwiftUI
 
 struct Month: View {
     @State var isStartDate = true
-    var manager: CalenderManager
+    @ObservedObject var manager: CalenderManager
     let monthOffset: Int
     let daysPerWeek = 7
     let cellSize: CGFloat = 32

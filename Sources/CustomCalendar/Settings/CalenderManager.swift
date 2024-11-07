@@ -10,14 +10,14 @@ class CalenderManager: ObservableObject {
     @Published var selectedDate: Date? = nil
     @Published var startDate: Date? = nil
     @Published var endDate: Date? = nil
-    @Published var calendar = Calendar.current
-    @Published var minimumDate = Date()
-    @Published var maximumDate = Date()
-    @Published var disabledDates: [Date] = []
-    @Published var disabledAfterDate: Date?
-    @Published var colors = Colors()
-    @Published var fonts = Fonts()
-    @Published var currentDate: Date
+    var calendar = Calendar.current
+    var minimumDate = Date()
+    var maximumDate = Date()
+    var disabledDates: [Date] = []
+    var disabledAfterDate: Date?
+    var colors = Colors()
+    var fonts = Fonts()
+    var currentDate: Date
     
     init(selectedDate: Date? = nil, startDate: Date? = nil, endDate: Date? = nil, calendar: Foundation.Calendar = Calendar.current, minimumDate: Date = Date(), maximumDate: Date = Date(), disabledDates: [Date] = [], disabledAfterDate: Date? = nil) {
         self.selectedDate = selectedDate

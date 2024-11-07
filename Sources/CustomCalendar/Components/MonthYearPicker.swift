@@ -42,8 +42,8 @@ struct MonthYearPicker: View {
         .onTapGesture {
             isPresented = false
         }
-        .onChange(of: selectedMonth) { _ in updateMonthOffset() }
-        .onChange(of: selectedYear) {_ in updateMonthOffset() }
+        .onChange(of: selectedMonth) { _ in  updateMonthOffset() }
+        .onChange(of: selectedYear) { _ in updateMonthOffset() }
     }
     
     private func updateMonthOffset() {
