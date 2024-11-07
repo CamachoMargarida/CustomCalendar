@@ -9,7 +9,7 @@ import SwiftUI
 class Settings {
     static func getWeekdayHeaders(calendar: Calendar) -> [String] {
         let weekdays = calendar.shortStandaloneWeekdaySymbols
-        let firstWeekdayIndex = calendar.firstWeekday
+        let firstWeekdayIndex = calendar.firstWeekday - 1
         
         return Array(weekdays[firstWeekdayIndex...] + weekdays[..<firstWeekdayIndex])
     }

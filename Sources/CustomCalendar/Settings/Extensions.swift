@@ -66,16 +66,8 @@ extension Month {
         return true
     }
     
-    func isOneOfDisabledDates(date: Date) -> Bool {
-        manager.disabledDates.contains(date)
-    }
-    
     func isEnabled(date: Date) -> Bool {
-        let clampedDate = formatDate(date: date)
-        
-        if (manager.calendar.compare(clampedDate, to: manager.minimumDate, toGranularity: .day) == .orderedAscending) || (manager.calendar.compare(clampedDate, to: manager.maximumDate, toGranularity: .day) == .orderedDescending) { return false }
-        
-        return !isOneOfDisabledDates(date: date)
+        return !manager.disabledDates.contains(date)
     }
     
     func isStartDateAfterEnd() -> Bool {
@@ -101,6 +93,10 @@ extension Month {
         
     }
     
+    func isWeekendDate(date: Date) -> Bool {
+        return manager.calendar.isDateInWeekend(date)
+    }
+    
     func dateTapped(date: Date) {
         if isEnabled(date: date) {
             if isStartDate {
@@ -124,7 +120,7 @@ extension Month {
     
     func getDateAtIndex(index: Int) -> Date {
         let firstOfMonth = firstOfMonthOffset()
-        let weekday = manager.calendar.component(.weekday, from: firstOfMonth) - 1
+        let weekday = manager.calendar.component(.weekday, from: firstOfMonth)
         
         var startOffset = weekday - manager.calendar.firstWeekday
         startOffset += startOffset >= 0 ? 0 : daysPerWeek
@@ -167,6 +163,7 @@ extension Month {
                         isToday: isToday(date: date),
                         isSelected: isSpecialDate(date: date),
                         isBetween: isBetweenDate(date: date),
+                        isweekend: isWeekendDate(date: date),
                         endDate: manager.endDate,
                         startDate: manager.startDate
                     ),

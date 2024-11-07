@@ -13,16 +13,18 @@ struct CalendarDate {
     var isToday = false
     var isSelected = false
     var isBetween = false
+    var isweekend = false
     var endDate: Date?
     var startDate: Date?
     
-    init(date: Date, manager: CalenderManager, isDisabled: Bool = false, isToday: Bool = false, isSelected: Bool = false, isBetween: Bool = false, endDate: Date? = nil, startDate: Date? = nil) {
+    init(date: Date, manager: CalenderManager, isDisabled: Bool = false, isToday: Bool = false, isSelected: Bool = false, isBetween: Bool = false, isweekend: Bool = false, endDate: Date? = nil, startDate: Date? = nil) {
         self.date = date
         self.manager = manager
         self.isDisabled = isDisabled
         self.isToday = isToday
         self.isSelected = isSelected
         self.isBetween = isBetween
+        self.isweekend = isweekend
         self.endDate = endDate
         self.startDate = startDate
     }
@@ -48,6 +50,7 @@ struct CalendarDate {
     
     func getTextColor() -> Color {
         if isSelected || isToday { return manager.colors.selectedTextColor }
+        else if isweekend { return manager.colors.weekdayTextColor }
         
         return manager.colors.normalTextColor
     }

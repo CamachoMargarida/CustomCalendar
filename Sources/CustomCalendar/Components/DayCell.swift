@@ -67,5 +67,13 @@ struct DayCell: View {
             ),
             cellSize: 32
         )
+        DayCell(
+            calendarDate: CalendarDate(
+                date: Date(),
+                manager: CalenderManager(),
+                isweekend: true
+            ),
+            cellSize: 32
+        )
     }
 }
