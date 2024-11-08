@@ -3,7 +3,7 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-public struct CustomCalendarView: View {
+public struct CustomCalendar: View {
     @State var manager = CalenderManager(
         calendar: Calendar.current,
         minimumDate: Date(),
