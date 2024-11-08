@@ -7,7 +7,7 @@
 import SwiftUI
 
 extension Color {
-    init(hex: Int, opacity: Double = 1.0) {
+    public init(hex: Int, opacity: Double = 1.0) {
         self.init(
             .sRGB,
             red: Double((hex >> 16) & 0xff) / 255,
@@ -18,34 +18,35 @@ extension Color {
     }
 }
 
-class Colors {
+public class Colors {
     //MARK: - Text Colors
-    var normalDarkTextColor: Color = .white
     var normalTextColor: Color = .black
-    
-    var selectedDarkTextColor = Color(hex: 0x00A3FF)
     var selectedTextColor = Color(hex: 0xBC0A79)
-    
     var weekdayTextColor = Color(hex: 0x9D9D9D)
     
     //MARK: - Back Colors
-    var backgroundDarkColor = Color(hex: 0x2A3038)
     var backgroundColor: Color = .white
-    
-    var disabledDarkBackColor = Color(hex: 0x14181E)
     var disabledBackColor = Color(hex: 0xEBEBF5, opacity: 0.8)
-    
-    var selectedDarkBackColor = Color(hex: 0x00A3FF, opacity: 0.12)
     var selectedBackColor = Color(hex: 0xBC0A79, opacity: 0.12)
-    
-    var betweenDarkBackColor = Color(hex: 0x00A3FF, opacity: 0.12)
     var betweenBackColor = Color(hex: 0xBC0A79, opacity: 0.12)
-    
-    var holidayDarkBackColor = Color(hex: 0x14181E)
     var holidayBackColor = Color(hex: 0xEBEBF5, opacity: 0.8)
     
     //MARK: - Border Colors
     var holidayBorderColor = Color(hex: 0xBC0A79)
     var disabledBorderColor = Color(hex: 0x00A3FF)
-    var normalBorderColor = Color.white
+    var normalBorderColor: Color = .white
+    
+    public init(normalTextColor: Color = .black, selectedTextColor: Color = Color(hex: 0xBC0A79), weekdayTextColor: Color = Color(hex: 0x9D9D9D), backgroundColor: Color = .white, disabledBackColor: Color = Color(hex: 0xEBEBF5, opacity: 0.8), selectedBackColor: Color = Color(hex: 0xBC0A79, opacity: 0.12), betweenBackColor: Color = Color(hex: 0xBC0A79, opacity: 0.12), holidayBackColor: Color = Color(hex: 0xEBEBF5, opacity: 0.8), holidayBorderColor: Color = Color(hex: 0xBC0A79), disabledBorderColor: Color = Color(hex: 0x00A3FF), normalBorderColor: Color = .white) {
+        self.normalTextColor = normalTextColor
+        self.selectedTextColor = selectedTextColor
+        self.weekdayTextColor = weekdayTextColor
+        self.backgroundColor = backgroundColor
+        self.disabledBackColor = disabledBackColor
+        self.selectedBackColor = selectedBackColor
+        self.betweenBackColor = betweenBackColor
+        self.holidayBackColor = holidayBackColor
+        self.holidayBorderColor = holidayBorderColor
+        self.disabledBorderColor = disabledBorderColor
+        self.normalBorderColor = normalBorderColor
+    }
 }

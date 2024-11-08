@@ -3,7 +3,7 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-public struct CustomCalendar: View {
+public struct CustomCalendarView: View {
     @State var manager = CalenderManager(
         calendar: Calendar.current,
         minimumDate: Date(),
@@ -16,10 +16,11 @@ public struct CustomCalendar: View {
     @Binding var holidayList: [Date]
     @Binding var currentDate: Date
     
-    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>) {
+    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, colors: Colors = Colors()) {
         _disabledList = disabledList
         _holidayList = holidayList
         _currentDate = currentDate
+        manager.colors = colors
     }
     
     public var body: some View {

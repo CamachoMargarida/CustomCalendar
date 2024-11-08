@@ -187,10 +187,3 @@ extension Month {
         }
     }
 }
-
-// MARK: - Custom Calendar Extensions
-extension CustomCalendar {
-    public func updateDisabledList(disabledList: [Date]) {
-        manager.disabledDates = disabledList
-    }
-}

@@ -12,18 +12,19 @@ class CalenderManager: ObservableObject {
     @Published var endDate: Date? = nil
     @Published var disabledDates: [Date] = []
     @Published var holidays: [Date] = []
+    @Published public var colors: Colors
     var calendar = Calendar.current
     var minimumDate = Date()
     var maximumDate = Date()
     var disabledAfterDate: Date?
-    var colors = Colors()
     var fonts = Fonts()
     var currentDate: Date
     
-    init(selectedDate: Date? = nil, startDate: Date? = nil, endDate: Date? = nil, calendar: Foundation.Calendar = Calendar.current, minimumDate: Date = Date(), maximumDate: Date = Date(), disabledAfterDate: Date? = nil) {
+    init(selectedDate: Date? = nil, startDate: Date? = nil, endDate: Date? = nil, colors: Colors = Colors(), calendar: Foundation.Calendar = Calendar.current, minimumDate: Date = Date(), maximumDate: Date = Date(), disabledAfterDate: Date? = nil) {
         self.selectedDate = selectedDate
         self.startDate = startDate
         self.endDate = endDate
+        self.colors = colors
         self.calendar = calendar
         self.minimumDate = minimumDate
         self.maximumDate = maximumDate
