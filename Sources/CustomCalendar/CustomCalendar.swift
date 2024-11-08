@@ -54,7 +54,7 @@ public struct CustomCalendar: View {
                         isPickerPresented = false
                     }
                 
-                MonthYearPicker(monthOffset: $monthOffset, isPresented: $isPickerPresented)
+                MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
                     .frame(maxWidth: 300)
                     .background(Color.white)
                     .cornerRadius(10)

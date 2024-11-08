@@ -7,6 +7,8 @@
 import SwiftUI
 
 struct MonthYearPicker: View {
+    var manager: CalenderManager
+    
     @Binding var monthOffset: Int
     @Binding var isPresented: Bool
     
@@ -21,6 +23,7 @@ struct MonthYearPicker: View {
             Picker("", selection: $selectedMonth) {
                 ForEach(0..<months.count, id: \.self) { month in
                     Text(months[month]).tag(month)
+                        .foregroundStyle(manager.colors.pickerTextColor)
                 }
             }
             .pickerStyle(.wheel)
@@ -28,6 +31,7 @@ struct MonthYearPicker: View {
             Picker("", selection: $selectedYear) {
                 ForEach(yearsRange, id: \.self) { year in
                     Text("\(year)").tag(year)
+                        .foregroundStyle(manager.colors.pickerTextColor)
                 }
             }
             .pickerStyle(.wheel)
@@ -44,6 +48,7 @@ struct MonthYearPicker: View {
         }
         .onChange(of: selectedMonth) { _ in  updateMonthOffset() }
         .onChange(of: selectedYear) { _ in updateMonthOffset() }
+        .background(manager.colors.pickerBackColor)
     }
     
     private func updateMonthOffset() {
