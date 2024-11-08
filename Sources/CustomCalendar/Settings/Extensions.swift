@@ -6,6 +6,7 @@
 //
 import SwiftUI
 
+// MARK: Month Extensions
 extension Month {
     func firstDateMonth() -> Date {
         var components = manager.calendar.dateComponents(calendarUnitYMD, from: Date())
@@ -68,6 +69,10 @@ extension Month {
     
     func isEnabled(date: Date) -> Bool {
         return !manager.disabledDates.contains(date)
+    }
+    
+    func isHoliday(date: Date) -> Bool {
+        return manager.holidays.contains(date)
     }
     
     func isStartDateAfterEnd() -> Bool {
@@ -164,6 +169,7 @@ extension Month {
                         isSelected: isSpecialDate(date: date),
                         isBetween: isBetweenDate(date: date),
                         isweekend: isWeekendDate(date: date),
+                        isHoliday: isHoliday(date: date),
                         endDate: manager.endDate,
                         startDate: manager.startDate
                     ),
@@ -179,5 +185,12 @@ extension Month {
                     .frame(maxWidth: .infinity, alignment: .center)
             }
         }
+    }
+}
+
+// MARK: - Custom Calendar Extensions
+extension CustomCalendar {
+    public func updateDisabledList(disabledList: [Date]) {
+        manager.disabledDates = disabledList
     }
 }

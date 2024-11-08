@@ -10,23 +10,23 @@ class CalenderManager: ObservableObject {
     @Published var selectedDate: Date? = nil
     @Published var startDate: Date? = nil
     @Published var endDate: Date? = nil
+    @Published var disabledDates: [Date] = []
+    @Published var holidays: [Date] = []
     var calendar = Calendar.current
     var minimumDate = Date()
     var maximumDate = Date()
-    var disabledDates: [Date] = []
     var disabledAfterDate: Date?
     var colors = Colors()
     var fonts = Fonts()
     var currentDate: Date
     
-    init(selectedDate: Date? = nil, startDate: Date? = nil, endDate: Date? = nil, calendar: Foundation.Calendar = Calendar.current, minimumDate: Date = Date(), maximumDate: Date = Date(), disabledDates: [Date] = [], disabledAfterDate: Date? = nil) {
+    init(selectedDate: Date? = nil, startDate: Date? = nil, endDate: Date? = nil, calendar: Foundation.Calendar = Calendar.current, minimumDate: Date = Date(), maximumDate: Date = Date(), disabledAfterDate: Date? = nil) {
         self.selectedDate = selectedDate
         self.startDate = startDate
         self.endDate = endDate
         self.calendar = calendar
         self.minimumDate = minimumDate
         self.maximumDate = maximumDate
-        self.disabledDates = disabledDates
         self.disabledAfterDate = disabledAfterDate
         
         self.currentDate = minimumDate
@@ -43,6 +43,7 @@ class CalenderManager: ObservableObject {
             }
         }
     }
+    
     
     func firstDateMonth() -> Date {
         var components = calendar.dateComponents([.year, .month, .day], from: minimumDate)

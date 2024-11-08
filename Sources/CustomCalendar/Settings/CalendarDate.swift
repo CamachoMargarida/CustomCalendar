@@ -14,10 +14,11 @@ struct CalendarDate {
     var isSelected = false
     var isBetween = false
     var isweekend = false
+    var isHoliday = false
     var endDate: Date?
     var startDate: Date?
     
-    init(date: Date, manager: CalenderManager, isDisabled: Bool = false, isToday: Bool = false, isSelected: Bool = false, isBetween: Bool = false, isweekend: Bool = false, endDate: Date? = nil, startDate: Date? = nil) {
+    init(date: Date, manager: CalenderManager, isDisabled: Bool = false, isToday: Bool = false, isSelected: Bool = false, isBetween: Bool = false, isweekend: Bool = false, isHoliday: Bool = false, endDate: Date? = nil, startDate: Date? = nil) {
         self.date = date
         self.manager = manager
         self.isDisabled = isDisabled
@@ -25,6 +26,7 @@ struct CalendarDate {
         self.isSelected = isSelected
         self.isBetween = isBetween
         self.isweekend = isweekend
+        self.isHoliday = isHoliday
         self.endDate = endDate
         self.startDate = startDate
     }
@@ -59,12 +61,14 @@ struct CalendarDate {
         if isSelected { return manager.colors.selectedBackColor }
         else if isDisabled { return manager.colors.disabledBackColor }
         else if isBetween { return manager.colors.betweenBackColor }
+        else if isHoliday { return manager.colors.holidayBackColor }
         
         return manager.colors.backgroundColor
     }
     
     func getBorderColor() -> Color {
         if isDisabled { return manager.colors.disabledBorderColor }
+        else if isHoliday { return manager.colors.holidayBorderColor }
         
         return manager.colors.normalBorderColor
     }

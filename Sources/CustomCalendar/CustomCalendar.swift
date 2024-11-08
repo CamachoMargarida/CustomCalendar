@@ -12,7 +12,15 @@ public struct CustomCalendar: View {
     @State var monthOffset = 0
     @State private var isPickerPresented = false
     
-    public init() {}
+    @Binding var disabledList: [Date]
+    @Binding var holidayList: [Date]
+    @Binding var currentDate: Date
+    
+    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>) {
+        _disabledList = disabledList
+        _holidayList = holidayList
+        _currentDate = currentDate
+    }
     
     public var body: some View {
         ZStack {
@@ -24,10 +32,18 @@ public struct CustomCalendar: View {
                 
                 Month(manager: manager, monthOffset: monthOffset)
             }
-            .padding()
             .background(manager.colors.backgroundColor)
             .onChange(of: monthOffset) { offset in
                 manager.updateCurrentDate(monthOffset: offset)
+                currentDate = manager.currentDate
+            }
+            .onChange(of: disabledList) { newList in
+                manager.disabledDates.removeAll()
+                manager.disabledDates = newList
+            }
+            .onChange(of: holidayList) { newList in
+                manager.holidays.removeAll()
+                manager.holidays = newList
             }
             
             if isPickerPresented {

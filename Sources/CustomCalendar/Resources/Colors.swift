@@ -41,6 +41,9 @@ class Colors {
     var betweenDarkBackColor = Color(hex: 0x00A3FF, opacity: 0.12)
     var betweenBackColor = Color(hex: 0xBC0A79, opacity: 0.12)
     
+    var holidayDarkBackColor = Color(hex: 0x14181E)
+    var holidayBackColor = Color(hex: 0xEBEBF5, opacity: 0.8)
+    
     //MARK: - Border Colors
     var holidayBorderColor = Color(hex: 0xBC0A79)
     var disabledBorderColor = Color(hex: 0x00A3FF)

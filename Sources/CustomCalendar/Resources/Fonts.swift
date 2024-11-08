@@ -15,5 +15,5 @@ extension Font {
 class Fonts {
     var regularTextFont = Font(.regular)
     var selectedTextFont = Font(.semibold)
-    var headerTextFont = Font(.bold)
+    var headerTextFont = Font(.semibold)
 }
