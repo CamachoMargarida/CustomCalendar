@@ -8,11 +8,22 @@ import SwiftUI
 
 class CalenderManager: ObservableObject {
     @Published var selectedDate: Date? = nil
-    @Published var startDate: Date? = nil
-    @Published var endDate: Date? = nil
     @Published var disabledDates: [Date] = []
     @Published var holidays: [Date] = []
+    @Published var selectedDates: [Date] = []
     @Published public var colors: Colors
+    
+    @Published var startDate: Date? = nil {
+        didSet {
+            updateSelectedDates()
+        }
+    }
+    @Published var endDate: Date? = nil {
+        didSet {
+            updateSelectedDates()
+        }
+    }
+    
     var calendar = Calendar.current
     var minimumDate = Date()
     var maximumDate = Date()
@@ -45,7 +56,6 @@ class CalenderManager: ObservableObject {
         }
     }
     
-    
     func firstDateMonth() -> Date {
         var components = calendar.dateComponents([.year, .month, .day], from: minimumDate)
         components.day = 1
@@ -72,5 +82,17 @@ class CalenderManager: ObservableObject {
         
         minimumDate = calendar.date(byAdding: .month, value: -1, to: currentDate)!
         maximumDate = calendar.date(byAdding: .month, value: 2, to: currentDate)!
+    }
+    
+    func updateSelectedDates() {
+        selectedDates.removeAll()
+        
+        guard let start = startDate, let end = endDate else { return }
+        
+        var currentDate = start
+        while currentDate <= end {
+            selectedDates.append(currentDate)
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        }
     }
 }

@@ -15,11 +15,13 @@ public struct CustomCalendar: View {
     @Binding var disabledList: [Date]
     @Binding var holidayList: [Date]
     @Binding var currentDate: Date
+    @Binding var selectedDates: [Date]
     
-    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, colors: Colors = Colors()) {
+    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, colors: Colors = Colors()) {
         _disabledList = disabledList
         _holidayList = holidayList
         _currentDate = currentDate
+        _selectedDates = selectedDates
         manager.colors = colors
     }
     
