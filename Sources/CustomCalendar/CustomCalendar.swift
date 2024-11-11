@@ -48,7 +48,7 @@ public struct CustomCalendar: View {
             }
             
             if isPickerPresented {
-                Color.black.opacity(0.4)
+                manager.colors.backgroundColor.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         isPickerPresented = false
@@ -56,7 +56,6 @@ public struct CustomCalendar: View {
                 
                 MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
                     .frame(maxWidth: 300)
-                    .background(manager.colors.pickerBackColor)
                     .cornerRadius(10)
                     .padding()
                     .shadow(radius: 10)

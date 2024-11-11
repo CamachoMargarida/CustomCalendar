@@ -44,6 +44,7 @@ struct MonthYearPicker: View {
             .clipShape(.rect.offset(x: 16))
             .padding(.leading, -16)
         }
+        .background(manager.colors.pickerBackColor)
         .onAppear {
             let currentDate = Calendar.current.date(byAdding: .month, value: monthOffset, to: firstDateMonth()) ?? Date()
             selectedMonth = Calendar.current.component(.month, from: currentDate) - 1
