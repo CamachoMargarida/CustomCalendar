@@ -19,7 +19,7 @@ struct MonthYearPicker: View {
     let months = Calendar.current.monthSymbols
     
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             Picker("", selection: $selectedMonth) {
                 ForEach(0..<months.count, id: \.self) { month in
                     Text(months[month]).tag(month)
@@ -35,8 +35,6 @@ struct MonthYearPicker: View {
                 }
             }
             .pickerStyle(.wheel)
-            
-            Spacer()
         }
         .onAppear {
             let currentDate = Calendar.current.date(byAdding: .month, value: monthOffset, to: firstDateMonth()) ?? Date()
