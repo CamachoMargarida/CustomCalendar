@@ -4,7 +4,7 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 public struct CustomCalendar: View {
-    @State var manager = CalenderManager(
+    @StateObject var manager = CalenderManager(
         calendar: Calendar.current,
         minimumDate: Date(),
         maximumDate: Calendar.current.date(byAdding: .month, value: 2, to: Date())!
@@ -47,6 +47,9 @@ public struct CustomCalendar: View {
             .onChange(of: holidayList) { newList in
                 manager.holidays.removeAll()
                 manager.holidays = newList
+            }
+            .onChange(of: manager.selectedDates) { newList in
+                selectedDates = newList
             }
             
             if isPickerPresented {

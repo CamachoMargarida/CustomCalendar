@@ -10,8 +10,8 @@ class CalenderManager: ObservableObject {
     @Published var selectedDate: Date? = nil
     @Published var disabledDates: [Date] = []
     @Published var holidays: [Date] = []
-    @Published var selectedDates: [Date] = []
     @Published public var colors: Colors
+    @Published var selectedDates: [Date] = []
     
     @Published var startDate: Date? = nil {
         didSet {
@@ -42,6 +42,8 @@ class CalenderManager: ObservableObject {
         self.disabledAfterDate = disabledAfterDate
         
         self.currentDate = minimumDate
+        
+        updateSelectedDates()
     }
     
     func disabledDatesContains(date: Date) -> Bool {
@@ -87,12 +89,19 @@ class CalenderManager: ObservableObject {
     func updateSelectedDates() {
         selectedDates.removeAll()
         
-        guard let start = startDate, let end = endDate else { return }
-        
-        var currentDate = start
-        while currentDate <= end {
-            selectedDates.append(currentDate)
-            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        if let startDate = startDate {
+            var currentDate = startDate
+            
+            if let endDate = endDate {
+                while currentDate <= endDate {
+                    selectedDates.append(currentDate)
+                    currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+                }
+            }
+            
+            else {
+                selectedDates.append(currentDate)
+            }
         }
     }
 }
