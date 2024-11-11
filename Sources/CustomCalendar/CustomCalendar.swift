@@ -56,7 +56,7 @@ public struct CustomCalendar: View {
                 
                 MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
                     .frame(maxWidth: 300)
-                    .background(Color.white)
+                    .background(manager.colors.pickerBackColor)
                     .cornerRadius(10)
                     .padding()
                     .shadow(radius: 10)

@@ -15,7 +15,11 @@ struct MonthYearPicker: View {
     @State private var selectedMonth = Calendar.current.component(.month, from: Date()) - 1
     @State private var selectedYear = Calendar.current.component(.year, from: Date())
     
-    let yearsRange = Array(2023...2030).map { String($0) }
+    let yearsRange: [String] = {
+        let currentYear = Calendar.current.component(.year, from: Date())
+        
+        return Array(currentYear...(currentYear + 2)).map { String($0) }
+    }()
     let months = Calendar.current.monthSymbols
     
     var body: some View {
@@ -50,7 +54,6 @@ struct MonthYearPicker: View {
         }
         .onChange(of: selectedMonth) { _ in  updateMonthOffset() }
         .onChange(of: selectedYear) { _ in updateMonthOffset() }
-        .background(manager.colors.pickerBackColor)
     }
     
     private func updateMonthOffset() {
