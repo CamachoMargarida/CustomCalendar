@@ -64,7 +64,7 @@ extension Month {
         else if manager.calendar.compare(date, to: manager.startDate ?? Date(), toGranularity: .day) == .orderedAscending { return false }
         else if manager.calendar.compare(date, to: manager.endDate ?? Date(), toGranularity: .day) == .orderedDescending { return false }
         
-        return true
+        return !isWeekendDate(date: date) && !isHoliday(date: date) && isEnabled(date: date)
     }
     
     func isEnabled(date: Date) -> Bool {
