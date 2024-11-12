@@ -4,11 +4,7 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 public struct CustomCalendar: View {
-    @StateObject var manager = CalenderManager(
-        calendar: Calendar.current,
-        minimumDate: Date(),
-        maximumDate: Calendar.current.date(byAdding: .month, value: 2, to: Date())!
-    )
+    @StateObject var manager: CalenderManager
     @State var monthOffset = 0
     @State private var isPickerPresented = false
     
@@ -22,7 +18,13 @@ public struct CustomCalendar: View {
         _holidayList = holidayList
         _currentDate = currentDate
         _selectedDates = selectedDates
-        manager.colors = colors
+        
+        _manager = StateObject(wrappedValue: CalenderManager(
+            colors: colors,
+            calendar: Calendar.current,
+            minimumDate: Date(),
+            maximumDate: Calendar.current.date(byAdding: .month, value: 2, to: Date())!
+        ))
     }
     
     public var body: some View {
