@@ -29,7 +29,7 @@ public class Colors {
     
     //MARK: - Back Colors
     var backgroundColor: Color = .white
-    var disabledBackColor = Color(hex: 0xEBEBF5, opacity: 0.8)
+    var absenceBackColor = Color(hex: 0xEBEBF5, opacity: 0.8)
     var selectedBackColor = Color(hex: 0xBC0A79, opacity: 0.12)
     var betweenBackColor = Color(hex: 0xBC0A79, opacity: 0.12)
     var holidayBackColor = Color(hex: 0xEBEBF5, opacity: 0.8)
@@ -37,10 +37,10 @@ public class Colors {
     
     //MARK: - Border Colors
     var holidayBorderColor = Color(hex: 0xBC0A79)
-    var disabledBorderColor = Color(hex: 0x00A3FF)
+    var absenceBorderColor = Color(hex: 0x00A3FF)
     var normalBorderColor: Color = .white
     
-    public init(normalTextColor: Color = .black, selectedTextColor: Color = Color(hex: 0xBC0A79), weekdayTextColor: Color = Color(hex: 0x9D9D9D), pickerTextColor: Color = .white, holidayTextColor: Color = .white, absenceTextColor: Color = .white, backgroundColor: Color = .white, disabledBackColor: Color = Color(hex: 0xEBEBF5, opacity: 0.8), selectedBackColor: Color = Color(hex: 0xBC0A79, opacity: 0.12), betweenBackColor: Color = Color(hex: 0xBC0A79, opacity: 0.12), holidayBackColor: Color = Color(hex: 0xEBEBF5, opacity: 0.8), pickerBackColor: Color = .white, holidayBorderColor: Color = Color(hex: 0xBC0A79), disabledBorderColor: Color = Color(hex: 0x00A3FF), normalBorderColor: Color = .white) {
+    public init(normalTextColor: Color = .black, selectedTextColor: Color = Color(hex: 0xBC0A79), weekdayTextColor: Color = Color(hex: 0x9D9D9D), pickerTextColor: Color = .white, holidayTextColor: Color = .white, absenceTextColor: Color = .white, backgroundColor: Color = .white, absenceBackColor: Color = Color(hex: 0xEBEBF5, opacity: 0.8), selectedBackColor: Color = Color(hex: 0xBC0A79, opacity: 0.12), betweenBackColor: Color = Color(hex: 0xBC0A79, opacity: 0.12), holidayBackColor: Color = Color(hex: 0xEBEBF5, opacity: 0.8), pickerBackColor: Color = .white, holidayBorderColor: Color = Color(hex: 0xBC0A79), absenceBorderColor: Color = Color(hex: 0x00A3FF), normalBorderColor: Color = .white) {
         self.normalTextColor = normalTextColor
         self.selectedTextColor = selectedTextColor
         self.weekdayTextColor = weekdayTextColor
@@ -48,13 +48,13 @@ public class Colors {
         self.holidayTextColor = holidayTextColor
         self.absenceTextColor = absenceTextColor
         self.backgroundColor = backgroundColor
-        self.disabledBackColor = disabledBackColor
+        self.absenceBackColor = absenceBackColor
         self.selectedBackColor = selectedBackColor
         self.betweenBackColor = betweenBackColor
         self.holidayBackColor = holidayBackColor
         self.pickerBackColor = pickerBackColor
         self.holidayBorderColor = holidayBorderColor
-        self.disabledBorderColor = disabledBorderColor
+        self.absenceBorderColor = absenceBorderColor
         self.normalBorderColor = normalBorderColor
     }
 }

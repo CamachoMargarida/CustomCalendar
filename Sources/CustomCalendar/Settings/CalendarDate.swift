@@ -55,13 +55,15 @@ struct CalendarDate {
     func getTextColor() -> Color {
         if isSelected || isToday { return manager.colors.selectedTextColor }
         else if isWeekend { return manager.colors.weekdayTextColor }
+        else if isHoliday { return manager.colors.holidayTextColor }
+        else if isAbsence { return manager.colors.absenceTextColor }
         
         return manager.colors.normalTextColor
     }
     
     func getBackColor() -> Color {
         if isSelected { return manager.colors.selectedBackColor }
-        else if isDisabled { return manager.colors.disabledBackColor }
+        else if isAbsence { return manager.colors.absenceBackColor }
         else if isBetween { return manager.colors.betweenBackColor }
         else if isHoliday { return manager.colors.holidayBackColor }
         
@@ -69,7 +71,7 @@ struct CalendarDate {
     }
     
     func getBorderColor() -> Color {
-        if isDisabled { return manager.colors.disabledBorderColor }
+        if isAbsence { return manager.colors.absenceBorderColor }
         else if isHoliday { return manager.colors.holidayBorderColor }
         
         return manager.colors.normalBorderColor
