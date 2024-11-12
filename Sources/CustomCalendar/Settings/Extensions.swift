@@ -68,7 +68,7 @@ extension Month {
     }
     
     func isEnabled(date: Date) -> Bool {
-        return !isAbsence(date: date) && !isHoliday(date: date) && !isBeforeToday(date: date)
+        return !isAbsence(date: date) && !isHoliday(date: date) && !isBeforeToday(date: date) && !isWeekendDate(date: date)
     }
     
     func isAbsence(date: Date) -> Bool {
