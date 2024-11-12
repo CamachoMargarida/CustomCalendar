@@ -68,7 +68,11 @@ extension Month {
     }
     
     func isEnabled(date: Date) -> Bool {
-        return !manager.disabledDates.contains(date)
+        return !isAbsence(date: date) && !isHoliday(date: date) && !isBeforeToday(date: date)
+    }
+    
+    func isAbsence(date: Date) -> Bool {
+        return manager.disabledDates.contains(date)
     }
     
     func isHoliday(date: Date) -> Bool {
@@ -81,6 +85,16 @@ extension Month {
         else if manager.calendar.compare(manager.endDate ?? Date(), to: manager.startDate ?? Date(), toGranularity: .day) == .orderedDescending { return false }
         
         return true
+    }
+    
+    func isAfterStart(date: Date) -> Bool {
+        if manager.startDate == nil { return false }
+        
+        return manager.calendar.compare(manager.startDate ?? Date(), to: date, toGranularity: .day) == .orderedAscending
+    }
+    
+    func isBeforeToday(date: Date) -> Bool {
+        return manager.calendar.compare(Date(), to: date, toGranularity: .day) == .orderedDescending
     }
     
     func isToday(date: Date) -> Bool {
@@ -104,6 +118,8 @@ extension Month {
     
     func dateTapped(date: Date) {
         if isEnabled(date: date) {
+            if isAfterStart(date: date) { isStartDate = false }
+            
             if isStartDate {
                 manager.startDate = date
                 manager.endDate = nil
@@ -164,11 +180,11 @@ extension Month {
                     calendarDate: CalendarDate(
                         date: date,
                         manager: manager,
-                        isDisabled: !isEnabled(date: date),
+                        isDisabled: isAbsence(date: date),
                         isToday: isToday(date: date),
                         isSelected: isSpecialDate(date: date),
                         isBetween: isBetweenDate(date: date),
-                        isweekend: isWeekendDate(date: date),
+                        isWeekend: isWeekendDate(date: date),
                         isHoliday: isHoliday(date: date),
                         endDate: manager.endDate,
                         startDate: manager.startDate

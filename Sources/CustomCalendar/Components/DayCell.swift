@@ -71,7 +71,7 @@ struct DayCell: View {
             calendarDate: CalendarDate(
                 date: Date(),
                 manager: CalenderManager(),
-                isweekend: true
+                isWeekend: true
             ),
             cellSize: 32
         )
