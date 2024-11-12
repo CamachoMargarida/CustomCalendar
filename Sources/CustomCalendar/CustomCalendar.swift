@@ -35,7 +35,6 @@ public struct CustomCalendar: View {
                 
                 Month(manager: manager, monthOffset: monthOffset)
             }
-            .background(manager.colors.backgroundColor)
             .onChange(of: monthOffset) { offset in
                 manager.updateCurrentDate(monthOffset: offset)
                 currentDate = manager.currentDate
@@ -68,5 +67,6 @@ public struct CustomCalendar: View {
                     .animation(.easeInOut, value: isPickerPresented)
             }
         }
+        .background(manager.colors.backgroundColor)
     }
 }
