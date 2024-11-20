@@ -60,6 +60,13 @@ class CalenderManager: ObservableObject {
         }
     }
     
+    func holidaysContains(date: Date) -> Bool {
+        return holidays.contains { holiday in
+            
+            calendar.isDate(holiday, inSameDayAs: date)
+        }
+    }
+    
     func firstDateMonth() -> Date {
         var components = calendar.dateComponents([.year, .month, .day], from: minimumDate)
         components.day = 1
@@ -96,13 +103,17 @@ class CalenderManager: ObservableObject {
             
             if let endDate = endDate {
                 while currentDate <= endDate {
-                    selectedDates.append(currentDate)
+                    if !calendar.isDateInWeekend(currentDate) && !disabledDatesContains(date: currentDate) && !holidaysContains(date: currentDate) {
+                        selectedDates.append(currentDate)
+                    }
                     currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
                 }
             }
             
             else {
-                selectedDates.append(currentDate)
+                if !calendar.isDateInWeekend(currentDate) && !disabledDatesContains(date: currentDate) && !holidaysContains(date: currentDate) {
+                    selectedDates.append(currentDate)
+                }
             }
         }
     }
