@@ -11,7 +11,7 @@ public struct Event: Identifiable, Equatable {
     var title: String?
     var date: Date?
     
-    init(id: Int? = nil, title: String? = nil, date: Date? = nil) {
+    public init(id: Int? = nil, title: String? = nil, date: Date? = nil) {
         self.id = id
         self.title = title
         self.date = date
