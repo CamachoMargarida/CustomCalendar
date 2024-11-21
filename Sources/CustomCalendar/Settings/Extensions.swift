@@ -120,12 +120,7 @@ extension Month {
     }
     
     func dateEvents(date: Date) -> [String] {
-        var events: [String] = []
-        
-        if manager.holidays.contains(date) { events.append(Settings.formatDate(date: date)) }
-        if manager.disabledDates.contains(date) { events.append(Settings.formatDate(date: date)) }
-        
-        return events
+        return manager.events.map { $0.title }
     }
     
     func dateTapped(date: Date) {

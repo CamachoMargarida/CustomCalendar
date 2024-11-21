@@ -10,7 +10,7 @@ class CalenderManager: ObservableObject {
     @Published var selectedDate: Date? = nil
     @Published var disabledDates: [Date] = []
     @Published var holidays: [Date] = []
-    @Published var events: [Date: [String]] = [:]
+    @Published var events: [Event] = []
     @Published public var colors: Colors
     @Published var disableBeforeTodayDates: Bool
     @Published var selectedDates: [Date] = []

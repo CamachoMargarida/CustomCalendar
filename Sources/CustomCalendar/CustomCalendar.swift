@@ -12,12 +12,14 @@ public struct CustomCalendar: View {
     @Binding var holidayList: [Date]
     @Binding var currentDate: Date
     @Binding var selectedDates: [Date]
+    @Binding var eventList: [Event]
     
-    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne) {
+    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne) {
         _disabledList = disabledList
         _holidayList = holidayList
         _currentDate = currentDate
         _selectedDates = selectedDates
+        _eventList = eventList
         
         _manager = StateObject(wrappedValue: CalenderManager(
             colors: colors,
@@ -50,6 +52,10 @@ public struct CustomCalendar: View {
             .onChange(of: holidayList) { newList in
                 manager.holidays.removeAll()
                 manager.holidays = newList
+            }
+            .onChange(of: eventList) { newList in
+                manager.events.removeAll()
+                manager.events = newList
             }
             .onChange(of: manager.selectedDates) { newList in
                 selectedDates = newList
