@@ -13,7 +13,7 @@ public struct CustomCalendar: View {
     @Binding var currentDate: Date
     @Binding var selectedDates: [Date]
     
-    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType) {
+    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne) {
         _disabledList = disabledList
         _holidayList = holidayList
         _currentDate = currentDate
