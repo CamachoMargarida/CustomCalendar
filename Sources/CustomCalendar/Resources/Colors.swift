@@ -26,6 +26,7 @@ public class Colors {
     var pickerTextColor: Color = .white
     var holidayTextColor: Color = .white
     var absenceTextColor: Color = .white
+    var eventTextColor = Color(hex: 0xBC0A79)
     
     //MARK: - Back Colors
     var backgroundColor: Color = .white
@@ -34,6 +35,7 @@ public class Colors {
     var betweenBackColor = Color(hex: 0xBC0A79, opacity: 0.12)
     var holidayBackColor = Color(hex: 0xEBEBF5, opacity: 0.8)
     var pickerBackColor: Color = .white
+    var eventBackColor = Color(hex: 0xBC0A79, opacity: 0.12)
     
     //MARK: - Border Colors
     var holidayBorderColor = Color(hex: 0xBC0A79)

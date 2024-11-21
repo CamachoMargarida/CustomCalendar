@@ -10,6 +10,7 @@ class CalenderManager: ObservableObject {
     @Published var selectedDate: Date? = nil
     @Published var disabledDates: [Date] = []
     @Published var holidays: [Date] = []
+    @Published var events: [Date: [String]] = [:]
     @Published public var colors: Colors
     @Published var disableBeforeTodayDates: Bool
     @Published var selectedDates: [Date] = []
@@ -25,6 +26,8 @@ class CalenderManager: ObservableObject {
         }
     }
     
+    public var calendarType: CalendarType
+    
     var calendar = Calendar.current
     var minimumDate = Date()
     var maximumDate = Date()
@@ -32,7 +35,7 @@ class CalenderManager: ObservableObject {
     var fonts = Fonts()
     var currentDate: Date
     
-    init(selectedDate: Date? = nil, startDate: Date? = nil, endDate: Date? = nil, colors: Colors = Colors(), calendar: Foundation.Calendar = Calendar.current, minimumDate: Date = Date(), maximumDate: Date = Date(), disabledAfterDate: Date? = nil, disableBeforeTodayDates: Bool = true) {
+    init(selectedDate: Date? = nil, startDate: Date? = nil, endDate: Date? = nil, colors: Colors = Colors(), calendar: Foundation.Calendar = Calendar.current, minimumDate: Date = Date(), maximumDate: Date = Date(), disabledAfterDate: Date? = nil, disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne) {
         self.selectedDate = selectedDate
         self.startDate = startDate
         self.endDate = endDate
@@ -44,6 +47,7 @@ class CalenderManager: ObservableObject {
         self.disableBeforeTodayDates = disableBeforeTodayDates
         
         self.currentDate = minimumDate
+        self.calendarType = calendarType
         
         updateSelectedDates()
     }

@@ -36,3 +36,7 @@ struct Month: View {
         .background(manager.colors.backgroundColor)
     }
 }
+
+#Preview {
+    Month(isStartDate: true, manager: CalenderManager(calendarType: .calendarTwo), monthOffset: 0)
+}

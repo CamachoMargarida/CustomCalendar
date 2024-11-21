@@ -119,6 +119,15 @@ extension Month {
         return manager.calendar.isDateInWeekend(date)
     }
     
+    func dateEvents(date: Date) -> [String] {
+        var events: [String] = []
+        
+        if manager.holidays.contains(date) { events.append(Settings.formatDate(date: date)) }
+        if manager.disabledDates.contains(date) { events.append(Settings.formatDate(date: date)) }
+        
+        return events
+    }
+    
     func dateTapped(date: Date) {
         if isEnabled(date: date) {
             if isAfterStart(date: date) { isStartDate = false }
@@ -179,23 +188,35 @@ extension Month {
     func cellView(_ date: Date) -> some View {
         HStack(spacing: 0) {
             if isThisMonth(date: date) {
-                DayCell(
-                    calendarDate: CalendarDate(
-                        date: date,
-                        manager: manager,
-                        isDisabled: isAbsence(date: date),
-                        isToday: isToday(date: date),
-                        isSelected: isSpecialDate(date: date),
-                        isBetween: isBetweenDate(date: date),
-                        isWeekend: isWeekendDate(date: date),
-                        isHoliday: isHoliday(date: date),
-                        endDate: manager.endDate,
-                        startDate: manager.startDate
-                    ),
-                    cellSize: cellSize
-                )
-                .onTapGesture {
-                    dateTapped(date: date)
+                if manager.calendarType == .calendarOne {
+                    DayCell(
+                        calendarDate: CalendarDate(
+                            date: date,
+                            manager: manager,
+                            isDisabled: isAbsence(date: date),
+                            isToday: isToday(date: date),
+                            isSelected: isSpecialDate(date: date),
+                            isBetween: isBetweenDate(date: date),
+                            isWeekend: isWeekendDate(date: date),
+                            isHoliday: isHoliday(date: date),
+                            endDate: manager.endDate,
+                            startDate: manager.startDate
+                        ),
+                        cellSize: cellSize
+                    )
+                    .onTapGesture {
+                        dateTapped(date: date)
+                    }
+                }
+                else {
+                    DayCell(
+                        calendarDate: CalendarDate(
+                            date: date,
+                            manager: manager,
+                            events: dateEvents(date: date)
+                        ),
+                        cellSize: cellSize
+                    )
                 }
             }
             
