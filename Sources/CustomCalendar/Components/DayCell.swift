@@ -21,6 +21,8 @@ struct DayCell: View {
         }
         else {
             VStack(spacing: 0) {
+                Divider()
+                
                 Text(calendarDate.getText())
                     .foregroundStyle(calendarDate.getTextColor())
                     .background(calendarDate.getBackColor())
@@ -30,7 +32,7 @@ struct DayCell: View {
                 VStack(alignment: .center, spacing: 2) {
                     ForEach(calendarDate.events.indices.prefix(4), id: \.self) { index in
                         Text(calendarDate.events[index])
-                            .frame(maxWidth: .infinity, maxHeight: calendarDate.events.count == 1 ? .infinity : nil)
+                            .frame(maxWidth: .infinity, maxHeight: calendarDate.events.count < 4 ? .infinity : nil)
                             .foregroundStyle(calendarDate.manager.colors.eventTextColor)
                             .font(Fonts(customSize: 10).regularTextFont)
                             .background(calendarDate.manager.colors.eventBackColor)
@@ -47,11 +49,9 @@ struct DayCell: View {
                     }
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
-                .border(.black, width: 1)
                 .padding(2)
             }
             .frame(maxWidth: cellSize * 2, maxHeight: cellSize * 3)
-            .border(.black, width: 1)
         }
     }
 }
@@ -125,6 +125,46 @@ struct DayCell: View {
                 date: Date(),
                 manager: CalenderManager(calendarType: .calendarTwo),
                 events: ["Margarida"]
+            ),
+            cellSize: 32
+        )
+        DayCell(
+            calendarDate: CalendarDate(
+                date: Date(),
+                manager: CalenderManager(calendarType: .calendarTwo),
+                events: ["Margarida","Catarina"]
+            ),
+            cellSize: 32
+        )
+        DayCell(
+            calendarDate: CalendarDate(
+                date: Date(),
+                manager: CalenderManager(calendarType: .calendarTwo),
+                events: ["Margarida","Catarina","João R"]
+            ),
+            cellSize: 32
+        )
+        DayCell(
+            calendarDate: CalendarDate(
+                date: Date(),
+                manager: CalenderManager(calendarType: .calendarTwo),
+                events: ["Margarida","Catarina","João R","João L"]
+            ),
+            cellSize: 32
+        )
+        DayCell(
+            calendarDate: CalendarDate(
+                date: Date(),
+                manager: CalenderManager(calendarType: .calendarTwo),
+                events: ["Margarida","Catarina","João R","João L","Eduardo"]
+            ),
+            cellSize: 32
+        )
+        DayCell(
+            calendarDate: CalendarDate(
+                date: Date(),
+                manager: CalenderManager(calendarType: .calendarTwo),
+                events: ["Margarida","Catarina","João R","João L","Eduardo","Tiago"]
             ),
             cellSize: 32
         )
