@@ -6,17 +6,17 @@
 //
 import SwiftUI
 
-struct CalendarDate {
-    var date: Date
-    var manager: CalenderManager
-    var isDisabled = false
-    var isToday = false
-    var isSelected = false
-    var isBetween = false
-    var isWeekend = false
-    var isHoliday = false
-    var isAbsence = false
-    var events: [String] = []
+class CalendarDate: ObservableObject {
+    @Published var date: Date
+    @Published var manager: CalenderManager
+    @Published var isDisabled = false
+    @Published var isToday = false
+    @Published var isSelected = false
+    @Published var isBetween = false
+    @Published var isWeekend = false
+    @Published var isHoliday = false
+    @Published var isAbsence = false
+    @Published var events: [String] = []
     var endDate: Date?
     var startDate: Date?
     
@@ -45,7 +45,6 @@ struct CalendarDate {
     
     var font: Font {
         if isSelected { return manager.fonts.selectedTextFont }
-        
         return manager.fonts.regularTextFont
     }
     
@@ -59,7 +58,6 @@ struct CalendarDate {
         else if isWeekend { return manager.colors.weekdayTextColor }
         else if isHoliday { return manager.colors.holidayTextColor }
         else if isAbsence { return manager.colors.absenceTextColor }
-        
         return manager.colors.normalTextColor
     }
     
@@ -68,20 +66,17 @@ struct CalendarDate {
         else if isAbsence { return manager.colors.absenceBackColor }
         else if isBetween { return manager.colors.betweenBackColor }
         else if isHoliday { return manager.colors.holidayBackColor }
-        
         return manager.colors.backgroundColor
     }
     
     func getBorderColor() -> Color {
         if isAbsence { return manager.colors.absenceBorderColor }
         else if isHoliday { return manager.colors.holidayBorderColor }
-        
         return manager.colors.normalBorderColor
     }
     
     func getBorderShape() -> some Shape {
         if isSelected || isBetween { return AnyShape(Circle()) }
-        
         return AnyShape(RoundedRectangle(cornerRadius: 8))
     }
 }

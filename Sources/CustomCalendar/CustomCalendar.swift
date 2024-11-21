@@ -41,6 +41,9 @@ public struct CustomCalendar: View {
                 
                 Month(manager: manager, monthOffset: monthOffset)
             }
+            .onAppear {
+                manager.events = eventList
+            }
             .onChange(of: monthOffset) { offset in
                 manager.updateCurrentDate(monthOffset: offset)
                 currentDate = manager.currentDate

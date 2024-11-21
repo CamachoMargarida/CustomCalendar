@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct DayCell: View {
-    var calendarDate: CalendarDate
+    @ObservedObject var calendarDate: CalendarDate
     var cellSize: CGFloat
     
     var body: some View {
