@@ -61,7 +61,8 @@ public struct CustomCalendar: View {
                 selectedDates = newList
             }
             
-            if isPickerPresented { MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented) }
+            MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
+                .opacity(isPickerPresented ? 1 : 0)
         }
         .background(manager.colors.backgroundColor)
     }
