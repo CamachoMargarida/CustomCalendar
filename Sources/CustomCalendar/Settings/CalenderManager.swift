@@ -99,6 +99,10 @@ class CalenderManager: ObservableObject {
         maximumDate = calendar.date(byAdding: .month, value: 2, to: currentDate)!
     }
     
+    func updateCurrentOffset() -> Int {
+        return calendar.dateComponents([.month], from: Date(), to: currentDate).month!
+    }
+    
     func updateSelectedDates() {
         selectedDates.removeAll()
         
