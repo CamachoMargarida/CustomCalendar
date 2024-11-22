@@ -61,21 +61,7 @@ public struct CustomCalendar: View {
                 selectedDates = newList
             }
             
-            if isPickerPresented {
-                manager.colors.backgroundColor.opacity(0.4)
-                    .edgesIgnoringSafeArea(.all)
-                    .onTapGesture {
-                        isPickerPresented = false
-                    }
-                
-                MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
-                    .frame(maxWidth: 300)
-                    .cornerRadius(10)
-                    .padding()
-                    .shadow(radius: 10)
-                    .transition(.scale)
-                    .animation(.easeInOut, value: isPickerPresented)
-            }
+            if isPickerPresented { MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented) }
         }
         .background(manager.colors.backgroundColor)
     }

@@ -17,58 +17,66 @@ struct MonthYearPicker: View {
     
     let yearsRange: [String] = {
         let currentYear = Calendar.current.component(.year, from: Date())
-        
         return Array(currentYear...(currentYear + 2)).map { String($0) }
     }()
     let months = Calendar.current.monthSymbols
     
     var body: some View {
-        HStack(spacing: 0) {
-            Picker("", selection: $selectedMonth) {
-                ForEach(0..<months.count, id: \.self) { month in
-                    Text(months[month]).tag(month)
-                        .foregroundStyle(manager.colors.pickerTextColor)
+        ZStack {
+            // Background with opacity
+            manager.colors.backgroundColor.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    updateMonthOffset()
+                    isPresented = false
                 }
-            }
-            .pickerStyle(.wheel)
-            .clipShape(.rect.offset(x: -16))
-            .padding(.trailing, -16)
             
-            Picker("", selection: $selectedYear) {
-                ForEach(yearsRange, id: \.self) { year in
-                    Text("\(year)").tag(year)
-                        .foregroundStyle(manager.colors.pickerTextColor)
+            // Pickers
+            VStack {
+                HStack(spacing: 0) {
+                    Picker("", selection: $selectedMonth) {
+                        ForEach(0..<months.count, id: \.self) { month in
+                            Text(months[month]).tag(month)
+                                .foregroundStyle(manager.colors.pickerTextColor)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                    .padding(.trailing, -16)
+                    
+                    Picker("", selection: $selectedYear) {
+                        ForEach(yearsRange, id: \.self) { year in
+                            Text("\(year)").tag(year)
+                                .foregroundStyle(manager.colors.pickerTextColor)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                    .padding(.leading, -16)
                 }
+                .background(manager.colors.pickerBackColor)
+                .cornerRadius(10)
+                .padding()
+                .shadow(radius: 10)
             }
-            .pickerStyle(.wheel)
-            .clipShape(.rect.offset(x: 16))
-            .padding(.leading, -16)
+            .frame(maxWidth: 300)
+            .transition(.scale)
+            .animation(.easeInOut, value: isPresented)
         }
-        .background(manager.colors.pickerBackColor)
         .onAppear {
             let currentDate = Calendar.current.date(byAdding: .month, value: monthOffset, to: firstDateMonth()) ?? Date()
             selectedMonth = Calendar.current.component(.month, from: currentDate) - 1
             selectedYear = Calendar.current.component(.year, from: currentDate)
         }
-        .onTapGesture {
-            updateMonthOffset()
-            isPresented = false
-        }
-        //.onChange(of: selectedMonth) { _ in  updateMonthOffset() }
-        //.onChange(of: selectedYear) { _ in updateMonthOffset() }
     }
     
     private func updateMonthOffset() {
         let yearDiff = selectedYear - Calendar.current.component(.year, from: firstDateMonth())
         let monthDiff = selectedMonth - (Calendar.current.component(.month, from: firstDateMonth()) - 1)
-        
         monthOffset = (yearDiff * 12) + monthDiff
     }
     
     private func firstDateMonth() -> Date {
         var components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         components.day = 1
-        
         return Calendar.current.date(from: components) ?? Date()
     }
 }
