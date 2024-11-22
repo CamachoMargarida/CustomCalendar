@@ -50,11 +50,11 @@ public struct CustomCalendar: View {
                 manager.disabledDates = disabledList
                 manager.holidays = holidayList
                 manager.currentDate = currentDate
-                monthOffset = manager.updateCurrentOffset()
             }
             .onChange(of: monthOffset) { offset in
                 manager.updateCurrentDate(monthOffset: offset)
                 currentDate = manager.currentDate
+                monthOffset = manager.updateCurrentOffset()
             }
             .onChange(of: manager.selectedDates) { newList in
                 selectedDates = newList
