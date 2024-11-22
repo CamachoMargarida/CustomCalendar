@@ -25,10 +25,11 @@ struct MonthYearPicker: View {
         ZStack {
             // Background with opacity
             manager.colors.backgroundColor.opacity(0.4)
-                .edgesIgnoringSafeArea(.all)
+                .onChange(of: monthOffset) { newValue in
+                    isPresented = false
+                }
                 .onTapGesture {
                     updateMonthOffset()
-                    isPresented = false
                 }
             
             // Pickers
@@ -52,8 +53,8 @@ struct MonthYearPicker: View {
                     .pickerStyle(.wheel)
                     .padding(.leading, -16)
                 }
-                .background(manager.colors.pickerBackColor)
             }
+            .background(manager.colors.pickerBackColor)
             .frame(maxWidth: 300)
             .cornerRadius(10)
             .padding()
