@@ -29,8 +29,6 @@ public struct CustomCalendar: View {
             disableBeforeTodayDates: disableBeforeTodayDates,
             calendarType: calendarType
         ))
-        
-        monthOffset = manager.updateCurrentOffset()
     }
     
     public var body: some View {
