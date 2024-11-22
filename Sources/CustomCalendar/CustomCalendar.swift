@@ -41,20 +41,21 @@ public struct CustomCalendar: View {
                 
                 Month(manager: manager, monthOffset: monthOffset)
             }
-            .onAppear {
-                manager.events.removeAll()
-                manager.disabledDates.removeAll()
-                manager.holidays.removeAll()
-                
-                manager.events = eventList
-                manager.disabledDates = disabledList
-                manager.holidays = holidayList
-                manager.currentDate = currentDate
-            }
             .onChange(of: monthOffset) { offset in
                 manager.updateCurrentDate(monthOffset: offset)
                 currentDate = manager.currentDate
-                monthOffset = manager.updateCurrentOffset()
+            }
+            .onChange(of: disabledList) { newList in
+                manager.disabledDates.removeAll()
+                manager.disabledDates = newList
+            }
+            .onChange(of: holidayList) { newList in
+                manager.holidays.removeAll()
+                manager.holidays = newList
+            }
+            .onChange(of: eventList) { newList in
+                manager.events.removeAll()
+                manager.events = newList
             }
             .onChange(of: manager.selectedDates) { newList in
                 selectedDates = newList

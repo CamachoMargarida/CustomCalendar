@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct DayCell: View {
-    @ObservedObject var calendarDate: CalendarDate
+    var calendarDate: CalendarDate
     var cellSize: CGFloat
     
     var body: some View {
@@ -17,11 +17,6 @@ struct DayCell: View {
                 .foregroundStyle(calendarDate.getTextColor())
                 .font(calendarDate.font)
                 .background(calendarDate.getBackColor())
-                .clipShape(calendarDate.getBorderShape())
-                .overlay {
-                    calendarDate.getBorderShape()
-                        .stroke(calendarDate.getBorderColor(), lineWidth: 1)
-                }
                 .frame(maxWidth: .infinity, alignment: .center)
         }
         else {
