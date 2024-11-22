@@ -100,6 +100,7 @@ class CalenderManager: ObservableObject {
     }
     
     func updateCurrentOffset() -> Int {
+        print("--> Offset: \(calendar.dateComponents([.month], from: Date(), to: currentDate).month!)")
         return calendar.dateComponents([.month], from: Date(), to: currentDate).month!
     }
     
