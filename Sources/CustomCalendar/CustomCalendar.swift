@@ -46,19 +46,16 @@ public struct CustomCalendar: View {
                 manager.disabledDates.removeAll()
                 manager.holidays.removeAll()
                 
-                DispatchQueue.main.async {
-                    manager.events = eventList
-                    manager.disabledDates = disabledList
-                    manager.holidays = holidayList
-                    manager.currentDate = currentDate
-                }
+                manager.events = eventList
+                manager.disabledDates = disabledList
+                manager.holidays = holidayList
+                manager.currentDate = currentDate
+                
+                manager.objectWillChange.send()
             }
             .onChange(of: monthOffset) { offset in
                 manager.updateCurrentDate(monthOffset: offset)
                 currentDate = manager.currentDate
-            }
-            .onChange(of: holidayList) { newList in
-                manager.holidays = newList
             }
             .onChange(of: manager.selectedDates) { newList in
                 selectedDates = newList
