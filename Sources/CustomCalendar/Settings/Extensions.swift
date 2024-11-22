@@ -120,7 +120,7 @@ extension Month {
     }
     
     func dateEvents(date: Date) -> [String] {
-        return manager.events.map { $0.title! }
+        return manager.events.filter({ manager.calendar.isDate($0.date, inSameDayAs: date) }).map({ $0.title })
     }
     
     func dateTapped(date: Date) {
