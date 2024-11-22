@@ -42,6 +42,10 @@ public struct CustomCalendar: View {
                 Month(manager: manager, monthOffset: monthOffset)
             }
             .onAppear {
+                manager.events.removeAll()
+                manager.disabledDates.removeAll()
+                manager.holidays.removeAll()
+                
                 manager.events = eventList
                 manager.disabledDates = disabledList
                 manager.holidays = holidayList
