@@ -59,7 +59,7 @@ struct MonthYearPicker: View {
             .padding()
             .shadow(radius: 10)
             .transition(.scale)
-            .animation(.easeInOut, value: isPickerPresented)
+            .animation(.easeInOut, value: isPresented)
         }
         .onAppear {
             let currentDate = Calendar.current.date(byAdding: .month, value: monthOffset, to: firstDateMonth()) ?? Date()
