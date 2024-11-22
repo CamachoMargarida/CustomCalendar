@@ -22,6 +22,7 @@ struct DayCell: View {
                     calendarDate.getBorderShape()
                         .stroke(calendarDate.getBorderColor(), lineWidth: 1)
                 }
+                .frame(maxWidth: .infinity, alignment: .center)
         }
         else {
             VStack(spacing: 0) {
