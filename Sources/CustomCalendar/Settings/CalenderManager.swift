@@ -92,7 +92,9 @@ class CalenderManager: ObservableObject {
         return "\(calendar.monthSymbols[month - 1]) \(year)"
     }
     
-    func updateCurrentDate() {
+    func updateCurrentDate(monthOffset: Int) {
+        currentDate = calendar.date(byAdding: .month, value: monthOffset, to: Date())!
+        
         minimumDate = calendar.date(byAdding: .month, value: -1, to: currentDate)!
         maximumDate = calendar.date(byAdding: .month, value: 2, to: currentDate)!
     }
