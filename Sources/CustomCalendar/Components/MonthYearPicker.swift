@@ -51,11 +51,11 @@ struct MonthYearPicker: View {
             selectedYear = Calendar.current.component(.year, from: currentDate)
         }
         .onTapGesture {
+            updateMonthOffset()
             isPresented = false
         }
         //.onChange(of: selectedMonth) { _ in  updateMonthOffset() }
         //.onChange(of: selectedYear) { _ in updateMonthOffset() }
-        .onChange(of: isPresented) { _ in updateMonthOffset() }
     }
     
     private func updateMonthOffset() {
