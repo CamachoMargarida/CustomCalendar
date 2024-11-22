@@ -41,7 +41,7 @@ struct DayCell: View {
                     
                     if calendarDate.events.count > 3 {
                         Text("+\(calendarDate.events.count - 3)")
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .frame(maxWidth: .infinity, maxHeight: calendarDate.events.count == 1 ? .infinity : nil)
                             .foregroundStyle(calendarDate.manager.colors.eventTextColor)
                             .font(Fonts(customSize: 10).regularTextFont)
                             .background(calendarDate.manager.colors.eventBackColor)
@@ -51,7 +51,7 @@ struct DayCell: View {
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .padding(2)
             }
-            .frame(width: cellSize * 1.8, height: cellSize * 2.3)
+            .frame(maxWidth: cellSize * 2, maxHeight: cellSize * 2.5)
         }
     }
 }
