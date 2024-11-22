@@ -42,6 +42,7 @@ struct MonthYearPicker: View {
                         }
                     }
                     .pickerStyle(.wheel)
+                    .clipShape(.rect.offset(x: -16))
                     .padding(.trailing, -16)
                     
                     Picker("", selection: $selectedYear) {
@@ -51,6 +52,7 @@ struct MonthYearPicker: View {
                         }
                     }
                     .pickerStyle(.wheel)
+                    .clipShape(.rect.offset(x: 16))
                     .padding(.leading, -16)
                 }
             }
