@@ -34,9 +34,6 @@ struct Month: View {
             }
         }
         .background(manager.colors.backgroundColor)
-        .onChange(of: monthOffset) { offset in
-            print("--> Novo offset: \(offset)")
-        }
     }
 }
 
