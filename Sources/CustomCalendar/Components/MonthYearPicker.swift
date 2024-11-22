@@ -23,39 +23,47 @@ struct MonthYearPicker: View {
     let months = Calendar.current.monthSymbols
     
     var body: some View {
-        HStack(spacing: 0) {
-            Picker("", selection: $selectedMonth) {
-                ForEach(0..<months.count, id: \.self) { month in
-                    Text(months[month]).tag(month)
-                        .foregroundStyle(manager.colors.pickerTextColor)
+        ZStack {
+            manager.colors.backgroundColor.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    isPresented = false
                 }
-            }
-            .pickerStyle(.wheel)
-            .clipShape(.rect.offset(x: -16))
-            .padding(.trailing, -16)
             
-            Picker("", selection: $selectedYear) {
-                ForEach(yearsRange, id: \.self) { year in
-                    Text("\(year)").tag(year)
-                        .foregroundStyle(manager.colors.pickerTextColor)
+            HStack(spacing: 0) {
+                Picker("", selection: $selectedMonth) {
+                    ForEach(0..<months.count, id: \.self) { month in
+                        Text(months[month]).tag(month)
+                            .foregroundStyle(manager.colors.pickerTextColor)
+                    }
                 }
+                .pickerStyle(.wheel)
+                .clipShape(.rect.offset(x: -16))
+                .padding(.trailing, -16)
+                
+                Picker("", selection: $selectedYear) {
+                    ForEach(yearsRange, id: \.self) { year in
+                        Text("\(year)").tag(year)
+                            .foregroundStyle(manager.colors.pickerTextColor)
+                    }
+                }
+                .pickerStyle(.wheel)
+                .clipShape(.rect.offset(x: 16))
+                .padding(.leading, -16)
             }
-            .pickerStyle(.wheel)
-            .clipShape(.rect.offset(x: 16))
-            .padding(.leading, -16)
-        }
-        .background(manager.colors.pickerBackColor)
-        .onAppear {
-            let currentDate = Calendar.current.date(byAdding: .month, value: monthOffset, to: firstDateMonth()) ?? Date()
-            selectedMonth = Calendar.current.component(.month, from: currentDate) - 1
-            selectedYear = Calendar.current.component(.year, from: currentDate)
+            .background(manager.colors.pickerBackColor)
+            .onAppear {
+                let currentDate = Calendar.current.date(byAdding: .month, value: monthOffset, to: firstDateMonth()) ?? Date()
+                selectedMonth = Calendar.current.component(.month, from: currentDate) - 1
+                selectedYear = Calendar.current.component(.year, from: currentDate)
+            }
+            .onTapGesture {
+                isPresented = false
+            }
         }
         .onTapGesture {
             updateMonthOffset()
-            isPresented = false
         }
-        //.onChange(of: selectedMonth) { _ in  updateMonthOffset() }
-        //.onChange(of: selectedYear) { _ in updateMonthOffset() }
     }
     
     private func updateMonthOffset() {
