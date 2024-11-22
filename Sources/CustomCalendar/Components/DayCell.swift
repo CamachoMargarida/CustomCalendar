@@ -51,7 +51,7 @@ struct DayCell: View {
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .padding(2)
             }
-            .frame(width: cellSize * 2, height: cellSize * 2.5)
+            .frame(maxWidth: cellSize * 2, maxHeight: cellSize * 2.5)
         }
     }
 }
