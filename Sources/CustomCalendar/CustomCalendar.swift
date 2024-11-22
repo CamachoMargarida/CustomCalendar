@@ -55,9 +55,8 @@ public struct CustomCalendar: View {
             }
             .onChange(of: monthOffset) { offset in
                 manager.updateCurrentDate(monthOffset: offset)
-                manager.objectWillChange.send()
                 currentDate = manager.currentDate
-                monthOffset = offset
+                manager.objectWillChange.send()
             }
             .onChange(of: manager.selectedDates) { newList in
                 selectedDates = newList
