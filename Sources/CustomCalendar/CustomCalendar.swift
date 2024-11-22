@@ -49,6 +49,7 @@ public struct CustomCalendar: View {
                 manager.events = eventList
                 manager.disabledDates = disabledList
                 manager.holidays = holidayList
+                manager.currentDate = currentDate
                 
                 manager.objectWillChange.send()
             }
