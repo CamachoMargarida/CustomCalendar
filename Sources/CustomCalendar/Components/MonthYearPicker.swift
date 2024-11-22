@@ -27,6 +27,7 @@ struct MonthYearPicker: View {
             manager.colors.backgroundColor.opacity(0.4)
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture {
+                    updateMonthOffset()
                     isPresented = false
                 }
             
@@ -60,9 +61,6 @@ struct MonthYearPicker: View {
             .onTapGesture {
                 isPresented = false
             }
-        }
-        .onTapGesture {
-            updateMonthOffset()
         }
     }
     
