@@ -46,6 +46,7 @@ public struct CustomCalendar: View {
                 manager.disabledDates.removeAll()
                 manager.holidays.removeAll()
                 
+                manager.currentDate = currentDate
                 manager.events = eventList
                 manager.disabledDates = disabledList
                 manager.holidays = holidayList
