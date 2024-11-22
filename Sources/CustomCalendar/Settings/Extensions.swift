@@ -201,9 +201,6 @@ extension Month {
                         ),
                         cellSize: cellSize
                     )
-                    .onChange(of: manager.currentDate) { date in
-                        print("--> Current: \(date)")
-                    }
                     .onTapGesture {
                         dateTapped(date: date)
                     }
@@ -217,9 +214,6 @@ extension Month {
                         ),
                         cellSize: cellSize
                     )
-                    .onChange(of: manager.currentDate) { date in
-                        print("--> Current: \(date)")
-                    }
                 }
             }
             
