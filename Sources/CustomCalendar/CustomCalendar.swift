@@ -39,7 +39,7 @@ public struct CustomCalendar: View {
                 
                 Weekday(manager: manager)
                 
-                Month(manager: manager, monthOffset: $monthOffset)
+                Month(manager: manager, monthOffset: monthOffset)
             }
             .onAppear {
                 manager.events.removeAll()
