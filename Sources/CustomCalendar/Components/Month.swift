@@ -9,7 +9,7 @@ import SwiftUI
 struct Month: View {
     @State var isStartDate = true
     @ObservedObject var manager: CalenderManager
-    let monthOffset: Int
+    @Binding var monthOffset: Int
     let daysPerWeek = 7
     let cellSize: CGFloat = 32
     let calendarUnitYMD = Set<Calendar.Component>([.year, .month, .day])
@@ -37,6 +37,10 @@ struct Month: View {
     }
 }
 
-#Preview {
-    Month(isStartDate: true, manager: CalenderManager(calendarType: .calendarTwo), monthOffset: 0)
+struct ParentView: View {
+    @State private var monthOffset: Int = 0
+    
+    var body: some View {
+        Month(isStartDate: true, manager: CalenderManager(calendarType: .calendarTwo), monthOffset: $monthOffset)
+    }
 }
