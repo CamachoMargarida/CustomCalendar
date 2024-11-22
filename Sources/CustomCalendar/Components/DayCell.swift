@@ -17,12 +17,12 @@ struct DayCell: View {
                 .foregroundStyle(calendarDate.getTextColor())
                 .font(calendarDate.font)
                 .background(calendarDate.getBackColor())
-                .frame(maxWidth: .infinity, alignment: .center)
                 .clipShape(calendarDate.getBorderShape())
                 .overlay {
                     calendarDate.getBorderShape()
                         .stroke(calendarDate.getBorderColor(), lineWidth: 1)
                 }
+                .frame(maxWidth: .infinity, alignment: .center)
         }
         else {
             VStack(spacing: 0) {
