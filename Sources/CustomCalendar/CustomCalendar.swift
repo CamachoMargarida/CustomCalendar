@@ -62,6 +62,12 @@ public struct CustomCalendar: View {
             }
             
             if isPickerPresented {
+                manager.colors.backgroundColor.opacity(0.4)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        isPickerPresented = false
+                    }
+                
                 MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
                     .frame(maxWidth: 300)
                     .cornerRadius(10)
