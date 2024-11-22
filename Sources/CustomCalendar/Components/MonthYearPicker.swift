@@ -53,13 +53,13 @@ struct MonthYearPicker: View {
                     .padding(.leading, -16)
                 }
                 .background(manager.colors.pickerBackColor)
-                .cornerRadius(10)
-                .padding()
-                .shadow(radius: 10)
             }
             .frame(maxWidth: 300)
+            .cornerRadius(10)
+            .padding()
+            .shadow(radius: 10)
             .transition(.scale)
-            .animation(.easeInOut, value: isPresented)
+            .animation(.easeInOut, value: isPickerPresented)
         }
         .onAppear {
             let currentDate = Calendar.current.date(byAdding: .month, value: monthOffset, to: firstDateMonth()) ?? Date()
