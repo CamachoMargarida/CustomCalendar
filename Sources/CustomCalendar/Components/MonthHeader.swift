@@ -19,11 +19,11 @@ struct MonthHeader: View {
             
             Image(.arrowRight)
                 .foregroundStyle(manager.colors.selectedTextColor)
-                .onTapGesture {
-                    isPickerPresented = true
-                }
             
             Spacer()
+        }
+        .onTapGesture {
+            isPickerPresented = true
         }
     }
 }
