@@ -18,6 +18,11 @@ struct DayCell: View {
                 .font(calendarDate.font)
                 .background(calendarDate.getBackColor())
                 .frame(maxWidth: .infinity, alignment: .center)
+                .clipShape(calendarDate.getBorderShape())
+                .overlay {
+                    calendarDate.getBorderShape()
+                        .stroke(calendarDate.getBorderColor(), lineWidth: 1)
+                }
         }
         else {
             VStack(spacing: 0) {
