@@ -229,7 +229,7 @@ struct DayCell: View {
             calendarDate: CalendarDate(
                 date: Date(),
                 manager: CalenderManager(calendarType: .calendarTwo),
-                events: Event(
+                events: [Event(
                     title: "Margarida",
                     date: Date(),
                     style: EventStyle(
@@ -241,7 +241,7 @@ struct DayCell: View {
                                 .strokeBorder(.orange, style: StrokeStyle(lineWidth: 1, dash: [3]))
                         )
                     )
-                )
+                )]
             ),
             cellSize: 32
         )
