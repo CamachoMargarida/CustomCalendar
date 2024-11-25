@@ -38,7 +38,7 @@ struct DayCell: View {
                     VStack(alignment: .center, spacing: 2) {
                         ForEach(calendarDate.events, id: \.id) { event in
                             Text(event.title)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .frame(height: calendarDate.events.count == 1 && calendarDate.events.first?.title == "Feriado" ? cellSize * 2.2 : .infinity)
                                 .foregroundStyle(event.style.textColor)
                                 .font(Fonts(customSize: 8).regularTextFont)
                                 .background(event.style.backgroundColor)
@@ -52,7 +52,6 @@ struct DayCell: View {
                     .frame(maxHeight: .infinity, alignment: .top)
                     .padding(2)
                 }
-                .frame(height: calendarDate.events.count == 1 && calendarDate.events.first?.title == "Feriado" ? cellSize * 2.2 : .infinity)
             }
             .frame(width: cellSize * 1.5, height: cellSize * 2.2)
         }
