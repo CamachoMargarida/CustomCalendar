@@ -37,7 +37,7 @@ struct DayCell: View {
                 VStack(alignment: .center, spacing: 2) {
                     ForEach(calendarDate.events.prefix(3), id: \.id) { event in
                         Text(event.title)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .frame(maxWidth: .infinity, maxHeight: calendarDate.events.count == 1 ? .infinity : nil)
                             .foregroundStyle(event.style.textColor)
                             .font(Fonts(customSize: 8).regularTextFont)
                             .background(event.style.backgroundColor)
@@ -50,7 +50,7 @@ struct DayCell: View {
                     
                     if calendarDate.events.count > 3 {
                         Text("+\(calendarDate.events.count - 3)")
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .frame(maxWidth: .infinity)
                             .foregroundStyle(calendarDate.events.last!.style.textColor)
                             .font(Fonts(customSize: 8).regularTextFont)
                             .background(calendarDate.events.last!.style.backgroundColor)
