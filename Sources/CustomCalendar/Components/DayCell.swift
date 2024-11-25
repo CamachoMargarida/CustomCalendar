@@ -52,7 +52,7 @@ struct DayCell: View {
                     .frame(maxHeight: .infinity, alignment: .top)
                     .padding(2)
                 }
-                .frame(maxHeight: calendarDate.events.count == 1 && calendarDate.events.first?.title == "Feriado" ? cellSize * 2.2 : .infinity)
+                .frame(height: calendarDate.events.count == 1 && calendarDate.events.first?.title == "Feriado" ? cellSize * 2.2 : .infinity)
             }
             .frame(width: cellSize * 1.5, height: cellSize * 2.2)
         }
