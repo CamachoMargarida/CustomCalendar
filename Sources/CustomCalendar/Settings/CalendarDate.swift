@@ -31,7 +31,7 @@ struct CalendarDate {
         self.isWeekend = isWeekend
         self.isHoliday = isHoliday
         self.isAbsence = isAbsence
-        self.isBetween = isBeforeToday
+        self.isBeforeToday = isBeforeToday
         self.endDate = endDate
         self.startDate = startDate
         self.events = events
@@ -70,7 +70,6 @@ struct CalendarDate {
         else if isAbsence { return manager.colors.absenceBackColor }
         else if isBetween { return manager.colors.betweenBackColor }
         else if isHoliday { return manager.colors.holidayBackColor }
-        else if isBeforeToday { return manager.colors.backgroundColor }
         
         return manager.colors.backgroundColor
     }
