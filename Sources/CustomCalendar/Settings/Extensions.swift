@@ -119,8 +119,8 @@ extension Month {
         return manager.calendar.isDateInWeekend(date)
     }
     
-    func dateEvents(date: Date) -> [String] {
-        return manager.events.filter({ manager.calendar.isDate($0.date, inSameDayAs: date) }).map({ $0.title })
+    func dateEvents(date: Date) -> [Event] {
+        return manager.events.filter({ manager.calendar.isDate($0.date, inSameDayAs: date) })
     }
     
     func dateTapped(date: Date) {

@@ -35,22 +35,30 @@ struct DayCell: View {
                     .background(calendarDate.getBackColor())
                 
                 VStack(alignment: .center, spacing: 2) {
-                    ForEach(calendarDate.events.indices.prefix(3), id: \.self) { index in
-                        Text(calendarDate.events[index])
+                    ForEach(calendarDate.events.prefix(3), id: \.id) { event in
+                        Text(event.title)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .foregroundStyle(calendarDate.manager.colors.eventTextColor)
+                            .foregroundStyle(event.style.textColor)
                             .font(Fonts(customSize: 8).regularTextFont)
-                            .background(calendarDate.manager.colors.eventBackColor)
+                            .background(event.style.backgroundColor)
                             .clipShape(RoundedRectangle(cornerRadius: 2))
+                            .overlay {
+                                event.style.borderStyle
+                            }
+                            .frame(maxWidth: .infinity, alignment: .center)
                     }
                     
                     if calendarDate.events.count > 3 {
                         Text("+\(calendarDate.events.count - 3)")
-                            .frame(maxWidth: .infinity, maxHeight: calendarDate.events.count == 1 ? .infinity : nil)
-                            .foregroundStyle(calendarDate.manager.colors.eventTextColor)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .foregroundStyle(calendarDate.events.last!.style.textColor)
                             .font(Fonts(customSize: 8).regularTextFont)
-                            .background(calendarDate.manager.colors.eventBackColor)
+                            .background(calendarDate.events.last!.style.backgroundColor)
                             .clipShape(RoundedRectangle(cornerRadius: 2))
+                            .overlay {
+                                calendarDate.events.last!.style.borderStyle
+                            }
+                            .frame(maxWidth: .infinity, alignment: .center)
                     }
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
@@ -61,7 +69,7 @@ struct DayCell: View {
     }
 }
 
-#Preview {
+/*#Preview {
     Group {
         DayCell(
             calendarDate: CalendarDate(
@@ -114,7 +122,99 @@ struct DayCell: View {
             calendarDate: CalendarDate(
                 date: Date(),
                 manager: CalenderManager(calendarType: .calendarTwo),
-                events: ["Margarida","Catarina","João R","João L","Eduardo","Tiago","Alexandre"]
+                events: [
+                    Event(
+                        title: "Margarida",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .green,
+                            borderColor: .green,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.green, lineWidth: 1)
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "Catarina",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .green,
+                            borderColor: .green,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.green, lineWidth: 1)
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "João R",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .green,
+                            borderColor: .green,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.green, lineWidth: 1)
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "João L",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .green,
+                            borderColor: .green,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.green, lineWidth: 1)
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "Eduardo",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .green,
+                            borderColor: .green,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.green, lineWidth: 1)
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "Tiago",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .green,
+                            borderColor: .green,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.green, lineWidth: 1)
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "Alexandre",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .green,
+                            borderColor: .green,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.green, lineWidth: 1)
+                            )
+                        )
+                    )
+                ]
             ),
             cellSize: 32
         )
@@ -129,7 +229,19 @@ struct DayCell: View {
             calendarDate: CalendarDate(
                 date: Date(),
                 manager: CalenderManager(calendarType: .calendarTwo),
-                events: ["Margarida"]
+                events: Event(
+                    title: "Margarida",
+                    date: Date(),
+                    style: EventStyle(
+                        backgroundColor: .white,
+                        textColor: .orange,
+                        borderColor: .orange,
+                        borderStyle: AnyShape(
+                            RoundedRectangle(cornerRadius: 2)
+                                .strokeBorder(.orange, style: StrokeStyle(lineWidth: 1, dash: [3]))
+                        )
+                    )
+                )
             ),
             cellSize: 32
         )
@@ -137,7 +249,34 @@ struct DayCell: View {
             calendarDate: CalendarDate(
                 date: Date(),
                 manager: CalenderManager(calendarType: .calendarTwo),
-                events: ["Margarida","Catarina"]
+                events: [
+                    Event(
+                        title: "Margarida",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .orange,
+                            borderColor: .orange,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .strokeBorder(.orange, style: StrokeStyle(lineWidth: 1, dash: [3]))
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "Catarina",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .orange,
+                            borderColor: .orange,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .strokeBorder(.orange, style: StrokeStyle(lineWidth: 1, dash: [3]))
+                            )
+                        )
+                    )
+                ]
             ),
             cellSize: 32
         )
@@ -145,7 +284,47 @@ struct DayCell: View {
             calendarDate: CalendarDate(
                 date: Date(),
                 manager: CalenderManager(calendarType: .calendarTwo),
-                events: ["Margarida","Catarina","João R"]
+                events: [
+                    Event(
+                        title: "Margarida",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .orange,
+                            borderColor: .orange,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .strokeBorder(.orange, style: StrokeStyle(lineWidth: 1, dash: [3]))
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "Catarina",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .orange,
+                            borderColor: .orange,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .strokeBorder(.orange, style: StrokeStyle(lineWidth: 1, dash: [3]))
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "João R",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .red,
+                            borderColor: .red,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.red, lineWidth: 1)
+                            )
+                        )
+                    )
+                ]
             ),
             cellSize: 32
         )
@@ -153,25 +332,63 @@ struct DayCell: View {
             calendarDate: CalendarDate(
                 date: Date(),
                 manager: CalenderManager(calendarType: .calendarTwo),
-                events: ["Margarida","Catarina","João R","João L"]
-            ),
-            cellSize: 32
-        )
-        DayCell(
-            calendarDate: CalendarDate(
-                date: Date(),
-                manager: CalenderManager(calendarType: .calendarTwo),
-                events: ["Margarida","Catarina","João R","João L","Eduardo"]
-            ),
-            cellSize: 32
-        )
-        DayCell(
-            calendarDate: CalendarDate(
-                date: Date(),
-                manager: CalenderManager(calendarType: .calendarTwo),
-                events: ["Margarida","Catarina","João R","João L","Eduardo","Tiago"]
+                events: [
+                    Event(
+                        title: "Margarida",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .orange,
+                            borderColor: .orange,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .strokeBorder(.orange, style: StrokeStyle(lineWidth: 1, dash: [3]))
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "Catarina",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .orange,
+                            borderColor: .orange,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .strokeBorder(.orange, style: StrokeStyle(lineWidth: 1, dash: [3]))
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "João R",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .red,
+                            borderColor: .red,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.red, lineWidth: 1)
+                            )
+                        )
+                    ),
+                    Event(
+                        title: "João L",
+                        date: Date(),
+                        style: EventStyle(
+                            backgroundColor: .white,
+                            textColor: .green,
+                            borderColor: .green,
+                            borderStyle: AnyShape(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.green, lineWidth: 1)
+                            )
+                        )
+                    )
+                ]
             ),
             cellSize: 32
         )
     }
 }
+*/
