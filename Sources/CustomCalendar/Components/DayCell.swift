@@ -30,7 +30,6 @@ struct DayCell: View {
                 
                 Text(calendarDate.getText())
                     .foregroundStyle(calendarDate.getTextColor())
-                    .strikethrough(calendarDate.isBeforeToday, color: calendarDate.getTextColor())
                     .background(calendarDate.getBackColor())
                     .font(calendarDate.font)
                 
