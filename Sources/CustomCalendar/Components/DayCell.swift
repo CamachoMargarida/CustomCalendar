@@ -34,35 +34,49 @@ struct DayCell: View {
                     .font(calendarDate.font)
                     .strikethrough(calendarDate.isBeforeToday, color: calendarDate.getTextColor())
                 
-                VStack(alignment: .center, spacing: 2) {
-                    ForEach(calendarDate.events.prefix(3), id: \.id) { event in
-                        Text(event.title)
-                            .frame(maxWidth: .infinity, maxHeight: event.title == "Feriado" ? .infinity : nil)
-                            .foregroundStyle(event.style.textColor)
-                            .font(Fonts(customSize: 8).regularTextFont)
-                            .background(event.style.backgroundColor)
-                            .clipShape(RoundedRectangle(cornerRadius: 2))
-                            .overlay {
-                                event.style.borderStyle
-                            }
-                            .frame(maxWidth: .infinity, alignment: .center)
+                ScrollView(.vertical) {
+                    VStack(alignment: .center, spacing: 2) {
+                        ForEach(calendarDate.events, id: \.id) { event in
+                            Text(event.title)
+                                .frame(maxWidth: .infinity, maxHeight: event.title == "Feriado" ? cellSize * 2.2 : nil)
+                                .foregroundStyle(event.style.textColor)
+                                .font(Fonts(customSize: 8).regularTextFont)
+                                .background(event.style.backgroundColor)
+                                .clipShape(RoundedRectangle(cornerRadius: 2))
+                                .overlay {
+                                    event.style.borderStyle
+                                }
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+                        /*ForEach(calendarDate.events.prefix(3), id: \.id) { event in
+                         Text(event.title)
+                         .frame(maxWidth: .infinity, maxHeight: event.title == "Feriado" ? .infinity : nil)
+                         .foregroundStyle(event.style.textColor)
+                         .font(Fonts(customSize: 8).regularTextFont)
+                         .background(event.style.backgroundColor)
+                         .clipShape(RoundedRectangle(cornerRadius: 2))
+                         .overlay {
+                         event.style.borderStyle
+                         }
+                         .frame(maxWidth: .infinity, alignment: .center)
+                         }
+                         
+                         if calendarDate.events.count > 3 {
+                         Text("+\(calendarDate.events.count - 3)")
+                         .frame(maxWidth: .infinity)
+                         .foregroundStyle(calendarDate.events.last!.style.textColor)
+                         .font(Fonts(customSize: 8).regularTextFont)
+                         .background(calendarDate.events.last!.style.backgroundColor)
+                         .clipShape(RoundedRectangle(cornerRadius: 2))
+                         .overlay {
+                         calendarDate.events.last!.style.borderStyle
+                         }
+                         .frame(maxWidth: .infinity, alignment: .center)
+                         }*/
                     }
-                    
-                    if calendarDate.events.count > 3 {
-                        Text("+\(calendarDate.events.count - 3)")
-                            .frame(maxWidth: .infinity)
-                            .foregroundStyle(calendarDate.events.last!.style.textColor)
-                            .font(Fonts(customSize: 8).regularTextFont)
-                            .background(calendarDate.events.last!.style.backgroundColor)
-                            .clipShape(RoundedRectangle(cornerRadius: 2))
-                            .overlay {
-                                calendarDate.events.last!.style.borderStyle
-                            }
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .padding(2)
                 }
-                .frame(maxHeight: .infinity, alignment: .top)
-                .padding(2)
             }
             .frame(width: cellSize * 1.5, height: cellSize * 2.2)
         }
