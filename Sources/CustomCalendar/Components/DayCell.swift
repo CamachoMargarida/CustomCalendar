@@ -30,9 +30,9 @@ struct DayCell: View {
                 
                 Text(calendarDate.getText())
                     .foregroundStyle(calendarDate.getTextColor())
+                    .strikethrough(calendarDate.isBeforeToday, color: calendarDate.getTextColor())
                     .background(calendarDate.getBackColor())
                     .font(calendarDate.font)
-                    .strikethrough(calendarDate.isBeforeToday, color: calendarDate.getTextColor())
                 
                 VStack(alignment: .center, spacing: 2) {
                     ForEach(calendarDate.events.prefix(3), id: \.id) { event in
