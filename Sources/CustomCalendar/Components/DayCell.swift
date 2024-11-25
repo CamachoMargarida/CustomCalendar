@@ -32,6 +32,7 @@ struct DayCell: View {
                     .foregroundStyle(calendarDate.getTextColor())
                     .background(calendarDate.getBackColor())
                     .font(calendarDate.font)
+                    .border(.black)
                 
                 VStack(alignment: .center, spacing: 2) {
                     ForEach(calendarDate.events.prefix(3), id: \.id) { event in
