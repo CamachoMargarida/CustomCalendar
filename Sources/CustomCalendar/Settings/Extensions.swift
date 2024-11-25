@@ -182,8 +182,8 @@ extension Month {
     
     func cellView(_ date: Date) -> some View {
         HStack(spacing: 0) {
-            if manager.calendarType == .calendarOne {
-                if isThisMonth(date: date) {
+            if isThisMonth(date: date) {
+                if manager.calendarType == .calendarOne {
                     DayCell(
                         calendarDate: CalendarDate(
                             date: date,
@@ -204,21 +204,22 @@ extension Month {
                     }
                 }
                 else {
-                    Text("")
-                        .frame(maxWidth: .infinity, alignment: .center)
+                    DayCell(
+                        calendarDate: CalendarDate(
+                            date: date,
+                            manager: manager,
+                            isWeekend: isWeekendDate(date: date),
+                            isBeforeToday: isBeforeToday(date: date),
+                            events: dateEvents(date: date)
+                        ),
+                        cellSize: cellSize
+                    )
                 }
             }
-            else if manager.calendarType == .calendarTwo {
-                DayCell(
-                    calendarDate: CalendarDate(
-                        date: date,
-                        manager: manager,
-                        isWeekend: isWeekendDate(date: date),
-                        isBeforeToday: isBeforeToday(date: date),
-                        events: dateEvents(date: date)
-                    ),
-                    cellSize: cellSize
-                )
+            
+            else {
+                Text("")
+                    .frame(maxWidth: .infinity, alignment: .center)
             }
         }
     }
