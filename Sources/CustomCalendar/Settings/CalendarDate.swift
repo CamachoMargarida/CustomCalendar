@@ -70,6 +70,7 @@ struct CalendarDate {
         else if isAbsence { return manager.colors.absenceBackColor }
         else if isBetween { return manager.colors.betweenBackColor }
         else if isHoliday { return manager.colors.holidayBackColor }
+        else if isBeforeToday { return manager.colors.backgroundColor }
         
         return manager.colors.backgroundColor
     }
