@@ -58,7 +58,7 @@ struct CalendarDate {
     
     func getTextColor() -> Color {
         if isSelected || isToday { return manager.colors.selectedTextColor }
-        else if isWeekend { return manager.colors.weekdayTextColor }
+        else if isWeekend { return manager.colors.weekendTextColor }
         else if isHoliday { return manager.colors.holidayTextColor }
         else if isAbsence { return manager.colors.absenceTextColor }
         
