@@ -30,9 +30,9 @@ public struct EventStyle: Equatable {
     var backgroundColor: Color
     var textColor: Color
     var borderColor: Color
-    var borderStyle: AnyShape
+    var borderStyle: AnyView
     
-    public init(backgroundColor: Color, textColor: Color, borderColor: Color, borderStyle: AnyShape) {
+    public init(backgroundColor: Color, textColor: Color, borderColor: Color, borderStyle: AnyView) {
         self.backgroundColor = backgroundColor
         self.textColor = textColor
         self.borderColor = borderColor
