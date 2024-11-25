@@ -32,6 +32,7 @@ struct DayCell: View {
                     .foregroundStyle(calendarDate.getTextColor())
                     .background(calendarDate.getBackColor())
                     .font(calendarDate.font)
+                    .strikethrough(calendarDate.isBeforeToday, color: calendarDate.getTextColor())
                     .background(calendarDate.getBackColor())
                 
                 VStack(alignment: .center, spacing: 2) {

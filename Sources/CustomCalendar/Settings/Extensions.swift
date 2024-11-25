@@ -208,6 +208,8 @@ extension Month {
                         calendarDate: CalendarDate(
                             date: date,
                             manager: manager,
+                            isWeekend: isWeekendDate(date: date),
+                            isBeforeToday: isBeforeToday(date: date),
                             events: dateEvents(date: date)
                         ),
                         cellSize: cellSize

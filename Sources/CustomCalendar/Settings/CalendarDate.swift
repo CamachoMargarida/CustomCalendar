@@ -16,11 +16,12 @@ struct CalendarDate {
     var isWeekend = false
     var isHoliday = false
     var isAbsence = false
+    var isBeforeToday = false
     var events: [Event] = []
     var endDate: Date?
     var startDate: Date?
     
-    init(date: Date, manager: CalenderManager, isDisabled: Bool = false, isToday: Bool = false, isSelected: Bool = false, isBetween: Bool = false, isWeekend: Bool = false, isHoliday: Bool = false, isAbsence: Bool = false, endDate: Date? = nil, startDate: Date? = nil, events: [Event] = []) {
+    init(date: Date, manager: CalenderManager, isDisabled: Bool = false, isToday: Bool = false, isSelected: Bool = false, isBetween: Bool = false, isWeekend: Bool = false, isHoliday: Bool = false, isAbsence: Bool = false, isBeforeToday: Bool = false, endDate: Date? = nil, startDate: Date? = nil, events: [Event] = []) {
         self.date = date
         self.manager = manager
         self.isDisabled = isDisabled
@@ -30,6 +31,7 @@ struct CalendarDate {
         self.isWeekend = isWeekend
         self.isHoliday = isHoliday
         self.isAbsence = isAbsence
+        self.isBetween = isBeforeToday
         self.endDate = endDate
         self.startDate = startDate
         self.events = events
