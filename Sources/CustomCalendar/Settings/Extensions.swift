@@ -12,14 +12,14 @@ extension Month {
         var components = manager.calendar.dateComponents(calendarUnitYMD, from: Date())
         components.day = 1
         
-        return manager.calendar.startOfDay(for: manager.calendar.date(from: components)!)
+        return manager.calendar.date(from: components)!
     }
     
     func firstOfMonthOffset() -> Date {
         var offset = DateComponents()
         offset.month = monthOffset
         
-        return manager.calendar.startOfDay(for: manager.calendar.date(byAdding: offset, to: firstDateMonth())!)
+        return manager.calendar.date(byAdding: offset, to: firstDateMonth())!
     }
     
     func isThisMonth(date: Date) -> Bool {
@@ -156,7 +156,7 @@ extension Month {
         var components = DateComponents()
         components.day = index - startOffset
         
-        return manager.calendar.startOfDay(for: manager.calendar.date(byAdding: components, to: firstOfMonth)!)
+        return manager.calendar.date(byAdding: components, to: firstOfMonth)!
     }
     
     func monthArray() -> [[Date]] {

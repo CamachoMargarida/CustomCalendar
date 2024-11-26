@@ -41,6 +41,8 @@ class CalenderManager: ObservableObject {
         self.endDate = endDate
         self.colors = colors
         self.calendar = calendar
+        self.calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+
         self.minimumDate = minimumDate
         self.maximumDate = maximumDate
         self.disabledAfterDate = disabledAfterDate
@@ -75,14 +77,14 @@ class CalenderManager: ObservableObject {
         var components = calendar.dateComponents([.year, .month, .day], from: minimumDate)
         components.day = 1
         
-        return calendar.startOfDay(for: calendar.date(from: components) ?? Date())
+        return calendar.date(from: components) ?? Date()
     }
     
     func firstOfMonthForOffset(_ offset: Int) -> Date? {
         var offsetComponent = DateComponents()
         offsetComponent.month = offset
         
-        return calendar.startOfDay(for: calendar.date(byAdding: offsetComponent, to: firstDateMonth())!)
+        return calendar.date(byAdding: offsetComponent, to: firstDateMonth())!
     }
     
     func monthHeader() -> String {
@@ -93,10 +95,10 @@ class CalenderManager: ObservableObject {
     }
     
     func updateCurrentDate(monthOffset: Int) {
-        currentDate = calendar.startOfDay(for: calendar.date(byAdding: .month, value: monthOffset, to: Date())!)
+        currentDate = calendar.date(byAdding: .month, value: monthOffset, to: Date())!
         
-        minimumDate = calendar.startOfDay(for: calendar.date(byAdding: .month, value: -1, to: currentDate)!)
-        maximumDate = calendar.startOfDay(for: calendar.date(byAdding: .month, value: 2, to: currentDate)!)
+        minimumDate = calendar.date(byAdding: .month, value: -1, to: currentDate)!
+        maximumDate = calendar.date(byAdding: .month, value: 2, to: currentDate)!
     }
     
     func updateSelectedDates() {
