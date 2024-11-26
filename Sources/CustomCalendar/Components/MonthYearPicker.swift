@@ -80,9 +80,6 @@ struct MonthYearPicker: View {
     private func firstDateMonth() -> Date {
         var components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         components.day = 1
-        components.hour = 0
-        components.minute = 0
-        components.second = 0
         return Calendar.current.date(from: components) ?? Date()
     }
 }

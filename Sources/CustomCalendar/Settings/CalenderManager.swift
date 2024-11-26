@@ -93,10 +93,10 @@ class CalenderManager: ObservableObject {
     }
     
     func updateCurrentDate(monthOffset: Int) {
-        currentDate = calendar.date(byAdding: .month, value: monthOffset, to: Date())!
+        currentDate = calendar.startOfDay(for: calendar.date(byAdding: .month, value: monthOffset, to: Date())!)
         
-        minimumDate = calendar.date(byAdding: .month, value: -1, to: currentDate)!
-        maximumDate = calendar.date(byAdding: .month, value: 2, to: currentDate)!
+        minimumDate = calendar.startOfDay(for: calendar.date(byAdding: .month, value: -1, to: currentDate)!)
+        maximumDate = calendar.startOfDay(for: calendar.date(byAdding: .month, value: 2, to: currentDate)!)
     }
     
     func updateSelectedDates() {
