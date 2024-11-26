@@ -74,6 +74,9 @@ class CalenderManager: ObservableObject {
     func firstDateMonth() -> Date {
         var components = calendar.dateComponents([.year, .month, .day], from: minimumDate)
         components.day = 1
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
         
         return calendar.date(from: components) ?? Date()
     }
