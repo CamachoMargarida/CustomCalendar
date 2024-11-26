@@ -194,6 +194,7 @@ extension Month {
                             isBetween: isBetweenDate(date: date),
                             isWeekend: isWeekendDate(date: date),
                             isHoliday: isHoliday(date: date),
+                            isAbsence: isAbsence(date: date),
                             endDate: manager.endDate,
                             startDate: manager.startDate
                         ),
