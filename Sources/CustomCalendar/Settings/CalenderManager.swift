@@ -74,18 +74,15 @@ class CalenderManager: ObservableObject {
     func firstDateMonth() -> Date {
         var components = calendar.dateComponents([.year, .month, .day], from: minimumDate)
         components.day = 1
-        components.hour = 0
-        components.minute = 0
-        components.second = 0
         
-        return calendar.date(from: components) ?? Date()
+        return calendar.startOfDay(for: calendar.date(from: components) ?? Date())
     }
     
     func firstOfMonthForOffset(_ offset: Int) -> Date? {
         var offsetComponent = DateComponents()
         offsetComponent.month = offset
         
-        return calendar.date(byAdding: offsetComponent, to: firstDateMonth())
+        return calendar.startOfDay(for: calendar.date(byAdding: offsetComponent, to: firstDateMonth())!)
     }
     
     func monthHeader() -> String {
