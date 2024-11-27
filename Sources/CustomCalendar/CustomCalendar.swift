@@ -60,12 +60,13 @@ public struct CustomCalendar: View {
             .onChange(of: manager.selectedDates) { newList in
                 selectedDates = newList
             }
-            
-            if isPickerPresented {
-                MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
-                    .ignoresSafeArea()
-            }
+
         }
         .background(manager.colors.backgroundColor)
+        .overlay {
+            if isPickerPresented {
+                MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
+            }
+        }
     }
 }
