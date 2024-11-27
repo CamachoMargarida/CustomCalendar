@@ -6,7 +6,7 @@ import SwiftUI
 public struct CustomCalendar: View {
     @StateObject var manager: CalenderManager
     @State var monthOffset = 0
-    @Binding var isPickerPresented = false
+    @Binding var isPickerPresented: Bool
     
     @Binding var disabledList: [Date]
     @Binding var holidayList: [Date]
