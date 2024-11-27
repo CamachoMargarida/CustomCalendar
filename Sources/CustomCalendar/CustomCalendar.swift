@@ -61,20 +61,8 @@ public struct CustomCalendar: View {
                 selectedDates = newList
             }
             
-            ZStack {
-                if isPickerPresented {
-                    Color.black.opacity(0.5)
-                        .ignoresSafeArea()
-                        .onTapGesture {
-                            isPickerPresented = false // Fecha o picker ao clicar fora
-                        }
-                    
-                    ZStack {
-                        MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
-                    }
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
+                .opacity(isPickerPresented ? 1 : 0)
         }
         .background(manager.colors.backgroundColor)
     }
