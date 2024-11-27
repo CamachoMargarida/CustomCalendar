@@ -33,39 +33,37 @@ public struct CustomCalendar: View {
     
     public var body: some View {
         ZStack {
-            ZStack {
-                VStack(spacing: 16) {
-                    
-                    MonthHeader(manager: manager, monthOffset: $monthOffset, isPickerPresented: $isPickerPresented)
-                    
-                    Weekday(manager: manager)
-                    
-                    Month(manager: manager, monthOffset: monthOffset)
-                }
-                .onChange(of: monthOffset) { offset in
-                    manager.updateCurrentDate(monthOffset: offset)
-                    currentDate = manager.currentDate
-                }
-                .onChange(of: disabledList) { newList in
-                    manager.disabledDates.removeAll()
-                    manager.disabledDates = newList
-                }
-                .onChange(of: holidayList) { newList in
-                    manager.holidays.removeAll()
-                    manager.holidays = newList
-                }
-                .onChange(of: eventList) { newList in
-                    manager.events.removeAll()
-                    manager.events = newList
-                }
-                .onChange(of: manager.selectedDates) { newList in
-                    selectedDates = newList
-                }
+            VStack(spacing: 16) {
+                
+                MonthHeader(manager: manager, monthOffset: $monthOffset, isPickerPresented: $isPickerPresented)
+                
+                Weekday(manager: manager)
+                
+                Month(manager: manager, monthOffset: monthOffset)
+            }
+            .onChange(of: monthOffset) { offset in
+                manager.updateCurrentDate(monthOffset: offset)
+                currentDate = manager.currentDate
+            }
+            .onChange(of: disabledList) { newList in
+                manager.disabledDates.removeAll()
+                manager.disabledDates = newList
+            }
+            .onChange(of: holidayList) { newList in
+                manager.holidays.removeAll()
+                manager.holidays = newList
+            }
+            .onChange(of: eventList) { newList in
+                manager.events.removeAll()
+                manager.events = newList
+            }
+            .onChange(of: manager.selectedDates) { newList in
+                selectedDates = newList
             }
             
             MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
+                .opacity(isPickerPresented ? 1 : 0)
         }
         .background(manager.colors.backgroundColor)
-        
     }
 }
