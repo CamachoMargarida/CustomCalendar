@@ -62,12 +62,10 @@ public struct CustomCalendar: View {
                     selectedDates = newList
                 }
             }
+            
+            MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
         }
         .background(manager.colors.backgroundColor)
         
-        ZStack {
-            MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
