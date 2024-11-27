@@ -58,8 +58,11 @@ struct MonthYearPicker: View {
             selectedMonth = Calendar.current.component(.month, from: currentDate) - 1
             selectedYear = Calendar.current.component(.year, from: currentDate)
         }
-        .onChange(of: selectedMonth) { _ in updateMonthOffset() }
-        .onChange(of: selectedYear) { _ in updateMonthOffset() }
+        .onChange(of: isPresented) { newValue in
+            if newValue == false {
+                updateMonthOffset()
+            }
+        }
     }
     
     private func updateMonthOffset() {
