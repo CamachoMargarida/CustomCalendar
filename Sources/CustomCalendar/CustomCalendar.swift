@@ -68,5 +68,6 @@ public struct CustomCalendar: View {
         ZStack {
             MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
