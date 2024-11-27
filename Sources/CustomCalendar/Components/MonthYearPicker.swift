@@ -74,7 +74,10 @@ struct MonthYearPicker: View {
     private func updateMonthOffset() {
         let yearDiff = selectedYear - Calendar.current.component(.year, from: firstDateMonth())
         let monthDiff = selectedMonth - (Calendar.current.component(.month, from: firstDateMonth()) - 1)
-        monthOffset = (yearDiff * 12) + monthDiff
+        let newOffset = (yearDiff * 12) + monthDiff
+        
+        if newOffset != monthOffset { monthOffset = newOffset }
+        else { isPresented = false }
     }
     
     private func firstDateMonth() -> Date {
