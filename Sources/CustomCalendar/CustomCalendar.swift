@@ -6,7 +6,7 @@ import SwiftUI
 public struct CustomCalendar: View {
     @StateObject var manager: CalenderManager
     @State var monthOffset = 0
-    @Binding var isPickerPresented: Bool
+    @State private var isPickerPresented = false
     
     @Binding var disabledList: [Date]
     @Binding var holidayList: [Date]
@@ -14,13 +14,12 @@ public struct CustomCalendar: View {
     @Binding var selectedDates: [Date]
     @Binding var eventList: [Event]
     
-    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, isPickerPresented: Binding<Bool>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne) {
+    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne) {
         _disabledList = disabledList
         _holidayList = holidayList
         _currentDate = currentDate
         _selectedDates = selectedDates
         _eventList = eventList
-        _isPickerPresented = isPickerPresented
         
         _manager = StateObject(wrappedValue: CalenderManager(
             colors: colors,
@@ -63,7 +62,6 @@ public struct CustomCalendar: View {
             }
             
             MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
-                .opacity(isPickerPresented ? 1 : 0)
         }
         .background(manager.colors.backgroundColor)
     }
