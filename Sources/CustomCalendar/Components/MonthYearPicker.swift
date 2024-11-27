@@ -24,13 +24,9 @@ struct MonthYearPicker: View {
     var body: some View {
         ZStack {
             // Background with opacity
-            manager.colors.backgroundColor.opacity(0.4)
-                .onChange(of: monthOffset) { newValue in
-                    isPresented = false
-                }
-                .onTapGesture {
-                    updateMonthOffset()
-                }
+            Color.black.opacity(0.5)
+                .ignoresSafeArea()
+                .onTapGesture { updateMonthOffset() }
             
             // Pickers
             VStack {
@@ -68,6 +64,9 @@ struct MonthYearPicker: View {
             let currentDate = Calendar.current.date(byAdding: .month, value: monthOffset, to: firstDateMonth()) ?? Date()
             selectedMonth = Calendar.current.component(.month, from: currentDate) - 1
             selectedYear = Calendar.current.component(.year, from: currentDate)
+        }
+        .onChange(of: monthOffset) { newValue in
+            isPresented = false
         }
     }
     
