@@ -63,10 +63,6 @@ public struct CustomCalendar: View {
 
         }
         .background(manager.colors.backgroundColor)
-        .overlay {
-            if isPickerPresented {
-                MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
-            }
-        }
+        .fullScreenCover(isPresented: $isPickerPresented) { MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)}
     }
 }
