@@ -23,46 +23,52 @@ struct MonthYearPicker: View {
     
     var body: some View {
         ZStack {
-            // Background with opacity
-            manager.colors.backgroundColor.opacity(0.4)
-                .onChange(of: monthOffset) { newValue in
-                    isPresented = false
-                }
-                .onTapGesture {
-                    updateMonthOffset()
-                }
-            
-            // Pickers
-            VStack {
-                HStack(spacing: 0) {
-                    Picker("", selection: $selectedMonth) {
-                        ForEach(0..<months.count, id: \.self) { month in
-                            Text(months[month]).tag(month)
-                                .foregroundStyle(manager.colors.pickerTextColor)
+            if isPresented {
+                // Background with opacity
+                Color.black.opacity(0.5)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        updateMonthOffset()
+                        isPresented = false
+                    }
+                    .onChange(of: monthOffset) { newValue in
+                        isPresented = false
+                    }
+                
+                ZStack {
+                    // Pickers
+                    VStack {
+                        HStack(spacing: 0) {
+                            Picker("", selection: $selectedMonth) {
+                                ForEach(0..<months.count, id: \.self) { month in
+                                    Text(months[month]).tag(month)
+                                        .foregroundStyle(manager.colors.pickerTextColor)
+                                }
+                            }
+                            .pickerStyle(.wheel)
+                            .clipShape(.rect.offset(x: -16))
+                            .padding(.trailing, -16)
+                            
+                            Picker("", selection: $selectedYear) {
+                                ForEach(yearsRange, id: \.self) { year in
+                                    Text("\(year)").tag(year)
+                                        .foregroundStyle(manager.colors.pickerTextColor)
+                                }
+                            }
+                            .pickerStyle(.wheel)
+                            .clipShape(.rect.offset(x: 16))
+                            .padding(.leading, -16)
                         }
                     }
-                    .pickerStyle(.wheel)
-                    .clipShape(.rect.offset(x: -16))
-                    .padding(.trailing, -16)
-                    
-                    Picker("", selection: $selectedYear) {
-                        ForEach(yearsRange, id: \.self) { year in
-                            Text("\(year)").tag(year)
-                                .foregroundStyle(manager.colors.pickerTextColor)
-                        }
-                    }
-                    .pickerStyle(.wheel)
-                    .clipShape(.rect.offset(x: 16))
-                    .padding(.leading, -16)
+                    .background(manager.colors.pickerBackColor)
+                    .frame(maxWidth: 300)
+                    .cornerRadius(10)
+                    .padding()
+                    .shadow(radius: 10)
+                    .transition(.scale)
+                    .animation(.easeInOut, value: isPresented)
                 }
             }
-            .background(manager.colors.pickerBackColor)
-            .frame(maxWidth: 300)
-            .cornerRadius(10)
-            .padding()
-            .shadow(radius: 10)
-            .transition(.scale)
-            .animation(.easeInOut, value: isPresented)
         }
         .onAppear {
             let currentDate = Calendar.current.date(byAdding: .month, value: monthOffset, to: firstDateMonth()) ?? Date()
