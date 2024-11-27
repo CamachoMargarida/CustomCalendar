@@ -33,6 +33,20 @@ public struct CustomCalendar: View {
     
     public var body: some View {
         ZStack {
+            
+            if isPickerPresented {
+                Color.black.opacity(0.5)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        isPickerPresented = false // Fecha o picker ao clicar fora
+                    }
+                
+                ZStack {
+                    MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
+                }
+                .zIndex(1)
+            }
+            
             VStack(spacing: 16) {
                 
                 MonthHeader(manager: manager, monthOffset: $monthOffset, isPickerPresented: $isPickerPresented)
@@ -62,20 +76,5 @@ public struct CustomCalendar: View {
             }
         }
         .background(manager.colors.backgroundColor)
-        
-        ZStack {
-            if isPickerPresented {
-                Color.black.opacity(0.5)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        isPickerPresented = false // Fecha o picker ao clicar fora
-                    }
-                
-                ZStack {
-                    MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
-                }
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
