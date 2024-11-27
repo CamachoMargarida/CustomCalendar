@@ -63,14 +63,19 @@ public struct CustomCalendar: View {
         }
         .background(manager.colors.backgroundColor)
         
-        if isPickerPresented {
-            Color.black.opacity(0.5)
-                .ignoresSafeArea()
-                .onTapGesture {
-                    isPickerPresented = false // Fecha o picker ao clicar fora
+        ZStack {
+            if isPickerPresented {
+                Color.black.opacity(0.5)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        isPickerPresented = false // Fecha o picker ao clicar fora
+                    }
+                
+                ZStack {
+                    MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
                 }
-            
-            MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
+            }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
