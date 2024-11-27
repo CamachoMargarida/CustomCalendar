@@ -21,7 +21,7 @@ public struct MonthYearPicker: View {
     }()
     let months = Calendar.current.monthSymbols
     
-    init(manager: CalenderManager, monthOffset: Binding<Int>, isPresented: Binding<Bool>) {
+    public init(manager: CalenderManager, monthOffset: Binding<Int>, isPresented: Binding<Bool>) {
         self.manager = manager
         _monthOffset = monthOffset
         _isPresented = isPresented
