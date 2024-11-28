@@ -31,7 +31,7 @@ public struct MonthYearPicker: View {
     public var body: some View {
         ZStack {
             // Background with opacity
-            manager.colors.backgroundColor.opacity(0.4)
+            Color.black.opacity(0.5)
                 .onChange(of: monthOffset) { newValue in
                     isPresented = false
                 }
