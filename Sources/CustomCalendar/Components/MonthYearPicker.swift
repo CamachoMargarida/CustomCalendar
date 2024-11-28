@@ -6,11 +6,18 @@
 //
 import SwiftUI
 
-struct MonthYearPicker: View {
+public struct MonthYearPicker: View {
     var manager: CalenderManager
     
     @Binding var monthOffset: Int
     @Binding var isPresented: Bool
+    
+    public init(monthOffset: Binding<Int>, isPresented: Binding<Bool>) {
+        _monthOffset = monthOffset
+        _isPresented = isPresented
+        
+        manager = CalenderManager()
+    }
     
     @State private var selectedMonth = Calendar.current.component(.month, from: Date()) - 1
     @State private var selectedYear = Calendar.current.component(.year, from: Date())
@@ -21,7 +28,7 @@ struct MonthYearPicker: View {
     }()
     let months = Calendar.current.monthSymbols
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             // Background with opacity
             manager.colors.backgroundColor.opacity(0.4)

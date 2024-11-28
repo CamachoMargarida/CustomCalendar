@@ -5,16 +5,18 @@ import SwiftUI
 @available(iOS 16.0, *)
 public struct CustomCalendar: View {
     @StateObject var manager: CalenderManager
-    @State var monthOffset = 0
-    @State private var isPickerPresented = false
     
+    @Binding var monthOffset: Int
+    @Binding var isPickerPresented: Bool
     @Binding var disabledList: [Date]
     @Binding var holidayList: [Date]
     @Binding var currentDate: Date
     @Binding var selectedDates: [Date]
     @Binding var eventList: [Event]
     
-    public init(disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne) {
+    public init(monthOffset: Binding<Int>, isPickerPresented: Binding<Bool>, disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne) {
+        _monthOffset = monthOffset
+        _isPickerPresented = isPickerPresented
         _disabledList = disabledList
         _holidayList = holidayList
         _currentDate = currentDate
@@ -60,9 +62,6 @@ public struct CustomCalendar: View {
             .onChange(of: manager.selectedDates) { newList in
                 selectedDates = newList
             }
-            
-            MonthYearPicker(manager: manager, monthOffset: $monthOffset, isPresented: $isPickerPresented)
-                .opacity(isPickerPresented ? 1 : 0)
         }
         .background(manager.colors.backgroundColor)
     }
