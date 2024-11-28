@@ -12,11 +12,11 @@ public struct MonthYearPicker: View {
     @Binding var monthOffset: Int
     @Binding var isPresented: Bool
     
-    public init(monthOffset: Binding<Int>, isPresented: Binding<Bool>) {
+    public init(monthOffset: Binding<Int>, isPresented: Binding<Bool>, colors: Colors = Colors()) {
         _monthOffset = monthOffset
         _isPresented = isPresented
         
-        manager = CalenderManager()
+        manager = CalenderManager(colors: colors)
     }
     
     @State private var selectedMonth = Calendar.current.component(.month, from: Date()) - 1
