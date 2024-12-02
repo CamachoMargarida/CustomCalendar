@@ -8,6 +8,7 @@ public struct CustomCalendar: View {
     
     @Binding var monthOffset: Int
     @Binding var isPickerPresented: Bool
+    @Binding var isLoading: Bool
     @Binding var disabledList: [Date]
     @Binding var holidayList: [Date]
     @Binding var currentDate: Date
@@ -16,7 +17,7 @@ public struct CustomCalendar: View {
     
     private var enableHorizontalScroll: Bool
     
-    public init(monthOffset: Binding<Int>, isPickerPresented: Binding<Bool>, disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne, enableHorizontalScroll: Bool = false) {
+    public init(monthOffset: Binding<Int>, isPickerPresented: Binding<Bool>, isLoading: Binding<Bool>, disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne, enableHorizontalScroll: Bool = false) {
         _monthOffset = monthOffset
         _isPickerPresented = isPickerPresented
         _disabledList = disabledList
@@ -24,6 +25,7 @@ public struct CustomCalendar: View {
         _currentDate = currentDate
         _selectedDates = selectedDates
         _eventList = eventList
+        _isLoading = isLoading
         
         _manager = StateObject(wrappedValue: CalenderManager(
             colors: colors,
@@ -46,6 +48,10 @@ public struct CustomCalendar: View {
                 Weekday(manager: manager)
                 
                 Month(manager: manager, monthOffset: monthOffset)
+                    .opacity(isLoading ? 0 : 1)
+                
+                ProgressView()
+                    .opacity(isLoading ? 1 : 0)
             }
             .onChange(of: monthOffset) { offset in
                 manager.updateCurrentDate(monthOffset: offset)
