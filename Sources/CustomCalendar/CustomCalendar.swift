@@ -41,7 +41,7 @@ public struct CustomCalendar: View {
     
     public var body: some View {
         ZStack {
-            VStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 16) {
                 
                 MonthHeader(manager: manager, monthOffset: $monthOffset, isPickerPresented: $isPickerPresented)
                 
@@ -93,5 +93,5 @@ public struct CustomCalendar: View {
 }
 
 #Preview {
-    CustomCalendar(monthOffset: .constant(0), isPickerPresented: .constant(false), isLoading: .constant(true), disabledList: .constant([]), holidayList: .constant([]), currentDate: .constant(Date()), selectedDates: .constant([]), eventList: .constant([]))
+    CustomCalendar(monthOffset: .constant(0), isPickerPresented: .constant(false), isLoading: .constant(false), disabledList: .constant([]), holidayList: .constant([]), currentDate: .constant(Date()), selectedDates: .constant([]), eventList: .constant([]))
 }

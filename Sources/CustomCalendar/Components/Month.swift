@@ -14,7 +14,6 @@ struct Month: View {
     
     let monthOffset: Int
     let daysPerWeek = 7
-    let cellSize: CGFloat = 32
     let calendarUnitYMD = Set<Calendar.Component>([.year, .month, .day])
     
     var monthsArray: [[Date]] {
@@ -46,5 +45,5 @@ struct Month: View {
 }
 
 #Preview {
-    Month(isStartDate: true, manager: CalenderManager(calendarType: .calendarTwo), isLoading: .constant(true), monthOffset: 0)
+    Month(isStartDate: true, manager: CalenderManager(calendarType: .calendarTwo), isLoading: .constant(false), monthOffset: 0)
 }

@@ -29,6 +29,7 @@ struct DayCell: View {
                 Divider()
                 
                 Text(calendarDate.getText())
+                    .frame(width: cellSize)
                     .foregroundStyle(calendarDate.getTextColor())
                     .background(calendarDate.getBackColor())
                     .font(calendarDate.font)
@@ -39,7 +40,7 @@ struct DayCell: View {
                         ForEach(calendarDate.events, id: \.id) { event in
                             Text(event.title)
                                 .frame(maxWidth: .infinity, alignment: .center)
-                                .frame(height: calendarDate.events.count == 1 && calendarDate.events.first?.title == "Feriado" ? cellSize * 1.4 : .infinity, alignment: .center)
+                                .frame(height: calendarDate.events.count == 1 && calendarDate.events.first?.title == "Feriado" ? cellSize * 1.2 : .infinity, alignment: .center)
                                 .foregroundStyle(event.style.textColor)
                                 .font(Fonts(customSize: 8).regularTextFont)
                                 .background(event.style.backgroundColor)
@@ -55,7 +56,7 @@ struct DayCell: View {
                 }
 
             }
-            .frame(width: cellSize * 1.5, height: cellSize * 2.2)
+            .frame(height: cellSize * 1.8)
         }
     }
 }

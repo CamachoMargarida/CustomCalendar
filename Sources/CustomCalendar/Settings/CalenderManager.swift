@@ -54,6 +54,15 @@ class CalenderManager: ObservableObject {
         updateSelectedDates()
     }
     
+    var cellSize: CGFloat {
+        switch calendarType {
+        case .calendarOne:
+            return 32
+        case .calendarTwo:
+            return 40
+        }
+    }
+    
     func disabledDatesContains(date: Date) -> Bool {
         if let disabledAfterDate = disabledAfterDate, date > disabledAfterDate {
             return true

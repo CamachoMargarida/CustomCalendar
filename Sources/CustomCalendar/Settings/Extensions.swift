@@ -198,7 +198,7 @@ extension Month {
                             endDate: manager.endDate,
                             startDate: manager.startDate
                         ),
-                        cellSize: cellSize
+                        cellSize: manager.cellSize
                     )
                     .onTapGesture {
                         dateTapped(date: date)
@@ -213,7 +213,7 @@ extension Month {
                             isBeforeToday: isBeforeToday(date: date),
                             events: dateEvents(date: date)
                         ),
-                        cellSize: cellSize
+                        cellSize: manager.cellSize
                     )
                 }
             }

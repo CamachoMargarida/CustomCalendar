@@ -12,11 +12,11 @@ struct Weekday: View {
         Settings.getWeekdayHeaders(calendar: manager.calendar)
     }
     var body: some View {
-        HStack(alignment: .center) {
+        HStack(alignment: .center, spacing: 0) {
             ForEach(weekdays, id: \.self) { weekday in
                 Text(weekday)
                     .font(manager.fonts.regularTextFont)
-                    .frame(maxWidth: .infinity)
+                    .frame(width: .infinity, alignment: .center)
             }
             .foregroundStyle(manager.colors.weekdayTextColor)
             .background(manager.colors.backgroundColor)
