@@ -87,9 +87,10 @@ class CalenderManager: ObservableObject {
         return calendar.date(byAdding: offsetComponent, to: firstDateMonth())!
     }
     
-    func monthHeader() -> String {
-        let month = calendar.component(.month, from: currentDate)
-        let year = calendar.component(.year, from: currentDate)
+    func monthHeader(monthOffset: Int) -> String {
+        let date = calendar.date(byAdding: .month, value: monthOffset, to: currentDate)!
+        let month = calendar.component(.month, from: date)
+        let year = calendar.component(.year, from: date)
         
         return "\(calendar.monthSymbols[month - 1]) \(year)"
     }

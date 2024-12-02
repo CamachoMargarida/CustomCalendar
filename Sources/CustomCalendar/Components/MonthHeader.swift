@@ -13,7 +13,7 @@ struct MonthHeader: View {
     
     var body: some View {
         HStack {
-            Text(manager.monthHeader())
+            Text(manager.monthHeader(monthOffset: monthOffset))
                 .font(manager.fonts.headerTextFont)
                 .foregroundStyle(manager.colors.normalTextColor)
             

@@ -14,7 +14,9 @@ public struct CustomCalendar: View {
     @Binding var selectedDates: [Date]
     @Binding var eventList: [Event]
     
-    public init(monthOffset: Binding<Int>, isPickerPresented: Binding<Bool>, disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne) {
+    private var enableHorizontalScroll: Bool
+    
+    public init(monthOffset: Binding<Int>, isPickerPresented: Binding<Bool>, disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne, enableHorizontalScroll: Bool = false) {
         _monthOffset = monthOffset
         _isPickerPresented = isPickerPresented
         _disabledList = disabledList
@@ -31,6 +33,8 @@ public struct CustomCalendar: View {
             disableBeforeTodayDates: disableBeforeTodayDates,
             calendarType: calendarType
         ))
+        
+        self.enableHorizontalScroll = enableHorizontalScroll
     }
     
     public var body: some View {
@@ -64,5 +68,20 @@ public struct CustomCalendar: View {
             }
         }
         .background(manager.colors.backgroundColor)
+        .gesture(enableHorizontalScroll ? drag : nil)
+    }
+    
+    var drag: some Gesture {
+        DragGesture()
+            .onEnded { value in
+                withAnimation {
+                    if value.translation.width > 0 {
+                        monthOffset += 1
+                    }
+                    else if value.translation.width < 0 {
+                        monthOffset -= 1
+                    }
+                }
+            }
     }
 }
