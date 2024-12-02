@@ -50,9 +50,11 @@ public struct CustomCalendar: View {
                 Month(manager: manager, monthOffset: monthOffset)
                     .opacity(isLoading ? 0 : 1)
                 
-                ProgressView()
-                    .frame(maxHeight: .infinity, alignment: .center)
-                    .opacity(isLoading ? 1 : 0)
+                VStack {
+                    ProgressView()
+                    Spacer()
+                }
+                .opacity(isLoading ? 1 : 0)
             }
             .onChange(of: monthOffset) { offset in
                 manager.updateCurrentDate(monthOffset: offset)
