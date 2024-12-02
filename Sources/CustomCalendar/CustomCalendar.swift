@@ -48,7 +48,7 @@ public struct CustomCalendar: View {
                 Weekday(manager: manager)
                 
                 Month(manager: manager, isLoading: $isLoading, monthOffset: monthOffset)
-                    .frame(maxHeight: .infinity, alignment: .center)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 
             }
             .onChange(of: monthOffset) { offset in
@@ -93,5 +93,5 @@ public struct CustomCalendar: View {
 }
 
 #Preview {
-    CustomCalendar(monthOffset: .constant(0), isPickerPresented: .constant(false), isLoading: .constant(false), disabledList: .constant([]), holidayList: .constant([]), currentDate: .constant(Date()), selectedDates: .constant([]), eventList: .constant([]))
+    CustomCalendar(monthOffset: .constant(0), isPickerPresented: .constant(false), isLoading: .constant(true), disabledList: .constant([]), holidayList: .constant([]), currentDate: .constant(Date()), selectedDates: .constant([]), eventList: .constant([]))
 }
