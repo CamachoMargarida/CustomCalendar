@@ -75,11 +75,13 @@ public struct CustomCalendar: View {
         DragGesture()
             .onEnded { value in
                 withAnimation {
+                    // Swipe right
                     if value.translation.width > 0 {
-                        monthOffset += 1
-                    }
-                    else if value.translation.width < 0 {
                         monthOffset -= 1
+                    }
+                    // Swipe left
+                    else if value.translation.width < 0 {
+                        monthOffset += 1
                     }
                 }
             }
