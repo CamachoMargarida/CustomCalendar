@@ -51,6 +51,7 @@ public struct CustomCalendar: View {
                     .opacity(isLoading ? 0 : 1)
                 
                 ProgressView()
+                    .frame(maxHeight: .infinity, alignment: .center)
                     .opacity(isLoading ? 1 : 0)
             }
             .onChange(of: monthOffset) { offset in
