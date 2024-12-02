@@ -47,14 +47,9 @@ public struct CustomCalendar: View {
                 
                 Weekday(manager: manager)
                 
-                Month(manager: manager, monthOffset: monthOffset)
-                    .opacity(isLoading ? 0 : 1)
+                Month(manager: manager, isLoading: $isLoading, monthOffset: monthOffset)
+                    .frame(maxHeight: .infinity, alignment: .center)
                 
-                VStack {
-                    ProgressView()
-                    Spacer()
-                }
-                .opacity(isLoading ? 1 : 0)
             }
             .onChange(of: monthOffset) { offset in
                 manager.updateCurrentDate(monthOffset: offset)
@@ -95,4 +90,8 @@ public struct CustomCalendar: View {
                 }
             }
     }
+}
+
+#Preview {
+    CustomCalendar(monthOffset: .constant(0), isPickerPresented: .constant(false), isLoading: .constant(true), disabledList: .constant([]), holidayList: .constant([]), currentDate: .constant(Date()), selectedDates: .constant([]), eventList: .constant([]))
 }

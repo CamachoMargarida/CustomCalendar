@@ -9,6 +9,9 @@ import SwiftUI
 struct Month: View {
     @State var isStartDate = true
     @ObservedObject var manager: CalenderManager
+    
+    @Binding var isLoading: Bool
+    
     let monthOffset: Int
     let daysPerWeek = 7
     let cellSize: CGFloat = 32
@@ -19,14 +22,19 @@ struct Month: View {
     }
     
     var body: some View {
-        Group {
-            VStack(alignment: .leading, spacing: 10) {
+        VStack {
+            VStack(spacing: 10) {
+                if isLoading {
+                    ProgressView()
+                }
                 
-                VStack(alignment: .leading, spacing: 5) {
-                    ForEach(monthsArray, id: \.self) { row in
-                        HStack(spacing: 0) {
-                            ForEach(row, id: \.self) { cell in
-                                cellView(cell)
+                else {
+                    VStack(alignment: .leading, spacing: 5) {
+                        ForEach(monthsArray, id: \.self) { row in
+                            HStack(spacing: 0) {
+                                ForEach(row, id: \.self) { cell in
+                                    cellView(cell)
+                                }
                             }
                         }
                     }
@@ -38,5 +46,5 @@ struct Month: View {
 }
 
 #Preview {
-    Month(isStartDate: true, manager: CalenderManager(calendarType: .calendarTwo), monthOffset: 0)
+    Month(isStartDate: true, manager: CalenderManager(calendarType: .calendarTwo), isLoading: .constant(true), monthOffset: 0)
 }
