@@ -22,9 +22,9 @@ public struct MonthYearPicker: View {
     @State private var selectedMonth = Calendar.current.component(.month, from: Date()) - 1
     @State private var selectedYear = Calendar.current.component(.year, from: Date())
     
-    let yearsRange: [String] = {
+    let yearsRange: [Int] = {
         let currentYear = Calendar.current.component(.year, from: Date())
-        return Array(currentYear...(currentYear + 2)).map { String($0) }
+        return Array(currentYear...(currentYear + 2))
     }()
     let months = Calendar.current.monthSymbols
     
@@ -54,7 +54,7 @@ public struct MonthYearPicker: View {
                     
                     Picker("", selection: $selectedYear) {
                         ForEach(yearsRange, id: \.self) { year in
-                            Text("\(year)").tag(year)
+                            Text("\(String(year))").tag(year)
                                 .foregroundStyle(manager.colors.pickerTextColor)
                         }
                     }
