@@ -13,17 +13,24 @@ struct MonthHeader: View {
     
     var body: some View {
         HStack {
+            
+            Image(.arrowLeft)
+                .foregroundStyle(manager.colors.selectedTextColor)
+                .onTapGesture { monthOffset -= 1 }
+            
             Text(manager.monthHeader(monthOffset: monthOffset))
                 .font(manager.fonts.headerTextFont)
                 .foregroundStyle(manager.colors.normalTextColor)
+                .frame(maxWidth: .infinity)
+                .onTapGesture { isPickerPresented = true }
             
             Image(.arrowRight)
                 .foregroundStyle(manager.colors.selectedTextColor)
-            
-            Spacer()
-        }
-        .onTapGesture {
-            isPickerPresented = true
+                .onTapGesture { monthOffset += 1 }
         }
     }
+}
+
+#Preview {
+    MonthHeader(manager: CalenderManager(), monthOffset: .constant(0), isPickerPresented: .constant(false))
 }
