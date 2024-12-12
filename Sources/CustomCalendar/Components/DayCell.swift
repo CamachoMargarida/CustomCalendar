@@ -12,15 +12,16 @@ struct DayCell: View {
     
     var body: some View {
         if calendarDate.manager.calendarType == .calendarOne {
+            let event = calendarDate.events.first
+            
             Text(calendarDate.getText())
                 .frame(width: cellSize, height: cellSize)
-                .foregroundStyle(calendarDate.getTextColor())
+                .foregroundStyle(event?.style.textColor ?? calendarDate.getTextColor())
                 .font(calendarDate.font)
-                .background(calendarDate.getBackColor())
+                .background(event?.style.backgroundColor ?? calendarDate.getBackColor())
                 .clipShape(calendarDate.getBorderShape())
                 .overlay {
-                    calendarDate.getBorderShape()
-                        .stroke(calendarDate.getBorderColor(), lineWidth: 1)
+                    event?.style.borderStyle
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
         }

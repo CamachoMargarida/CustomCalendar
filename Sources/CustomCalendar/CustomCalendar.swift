@@ -9,19 +9,15 @@ public struct CustomCalendar: View {
     @Binding var monthOffset: Int
     @Binding var isPickerPresented: Bool
     @Binding var isLoading: Bool
-    @Binding var disabledList: [Date]
-    @Binding var holidayList: [Date]
     @Binding var currentDate: Date
     @Binding var selectedDates: [Date]
     @Binding var eventList: [Event]
     
     private var enableHorizontalScroll: Bool
     
-    public init(monthOffset: Binding<Int>, isPickerPresented: Binding<Bool>, isLoading: Binding<Bool>, disabledList: Binding<[Date]>, holidayList: Binding<[Date]>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne, enableHorizontalScroll: Bool = false) {
+    public init(monthOffset: Binding<Int>, isPickerPresented: Binding<Bool>, isLoading: Binding<Bool>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne, enableHorizontalScroll: Bool = false) {
         _monthOffset = monthOffset
         _isPickerPresented = isPickerPresented
-        _disabledList = disabledList
-        _holidayList = holidayList
         _currentDate = currentDate
         _selectedDates = selectedDates
         _eventList = eventList
@@ -55,14 +51,6 @@ public struct CustomCalendar: View {
                 manager.updateCurrentDate(monthOffset: offset)
                 currentDate = manager.currentDate
             }
-            .onChange(of: disabledList) { newList in
-                manager.disabledDates.removeAll()
-                manager.disabledDates = newList
-            }
-            .onChange(of: holidayList) { newList in
-                manager.holidays.removeAll()
-                manager.holidays = newList
-            }
             .onChange(of: eventList) { newList in
                 manager.events.removeAll()
                 manager.events = newList
@@ -93,5 +81,5 @@ public struct CustomCalendar: View {
 }
 
 #Preview {
-    CustomCalendar(monthOffset: .constant(0), isPickerPresented: .constant(false), isLoading: .constant(true), disabledList: .constant([]), holidayList: .constant([]), currentDate: .constant(Date()), selectedDates: .constant([]), eventList: .constant([]))
+    CustomCalendar(monthOffset: .constant(0), isPickerPresented: .constant(false), isLoading: .constant(true), currentDate: .constant(Date()), selectedDates: .constant([]), eventList: .constant([]))
 }

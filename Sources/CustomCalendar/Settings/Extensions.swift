@@ -64,22 +64,19 @@ extension Month {
         else if manager.calendar.compare(date, to: manager.startDate ?? Date(), toGranularity: .day) == .orderedAscending { return false }
         else if manager.calendar.compare(date, to: manager.endDate ?? Date(), toGranularity: .day) == .orderedDescending { return false }
         
-        return !isWeekendDate(date: date) && !isHoliday(date: date) && isEnabled(date: date)
+        return !isWeekendDate(date: date) && isEnabled(date: date)
     }
     
     func isEnabled(date: Date) -> Bool {
         if manager.disableBeforeTodayDates {
-            return !isAbsence(date: date) && !isHoliday(date: date) && !isBeforeToday(date: date) && !isWeekendDate(date: date)
+            return !isAbsence(date: date) && !isBeforeToday(date: date) && !isWeekendDate(date: date)
         }
-        return !isAbsence(date: date) && !isHoliday(date: date) && !isWeekendDate(date: date)
+        
+        return !isAbsence(date: date) && !isWeekendDate(date: date)
     }
     
     func isAbsence(date: Date) -> Bool {
-        return manager.disabledDates.contains(date)
-    }
-    
-    func isHoliday(date: Date) -> Bool {
-        return manager.holidays.contains(date)
+        return manager.events.map({ manager.calendar.startOfDay(for: $0.date) }).contains(date)
     }
     
     func isStartDateAfterEnd() -> Bool {
@@ -193,10 +190,9 @@ extension Month {
                             isSelected: isSpecialDate(date: date),
                             isBetween: isBetweenDate(date: date),
                             isWeekend: isWeekendDate(date: date),
-                            isHoliday: isHoliday(date: date),
-                            isAbsence: isAbsence(date: date),
                             endDate: manager.endDate,
-                            startDate: manager.startDate
+                            startDate: manager.startDate,
+                            events: dateEvents(date: date)
                         ),
                         cellSize: manager.cellSize
                     )
