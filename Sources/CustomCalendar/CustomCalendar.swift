@@ -57,15 +57,6 @@ public struct CustomCalendar: View {
             }
             .onChange(of: manager.selectedDates) { newList in
                 selectedDates = newList
-                
-                if selectedDates.count > 1 {
-                    manager.endDate = selectedDates.last
-                }
-                
-                else {
-                    manager.startDate = selectedDates.first
-                    manager.endDate = nil
-                }
             }
         }
         .background(manager.colors.backgroundColor)
