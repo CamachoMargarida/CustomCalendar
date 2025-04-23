@@ -66,6 +66,11 @@ public struct CustomCalendar: View {
     var drag: some Gesture {
         DragGesture()
             .onEnded { value in
+                let horizontal = abs(value.translation.width)
+                let vertical = abs(value.translation.height)
+                
+                guard horizontal > vertical else { return }
+                
                 withAnimation {
                     // Swipe right
                     if value.translation.width > 0 {
@@ -77,6 +82,16 @@ public struct CustomCalendar: View {
                     }
                 }
             }
+    }
+    
+    public func clearSelectedDates() {
+        manager.clearSelectedDates()
+    }
+}
+
+extension CalenderManager {
+    public func clearSelectedDates() {
+        self.selectedDates.removeAll()
     }
 }
 
