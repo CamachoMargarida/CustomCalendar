@@ -83,7 +83,9 @@ public struct CustomCalendar: View {
                 }
             }
     }
-    
+}
+
+extension CustomCalendar {
     public func clearSelectedDates() {
         manager.clearSelectedDates()
     }
