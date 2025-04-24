@@ -61,7 +61,10 @@ public struct CustomCalendar: View {
                 selectedDates = newList
             }
             .onChange(of: shouldClearData) { clearData in
-                if clearData { manager.selectedDates.removeAll() }
+                if clearData {
+                    manager.selectedDates.removeAll()
+                    shouldClearData = false
+                }
             }
         }
         .background(manager.colors.backgroundColor)
