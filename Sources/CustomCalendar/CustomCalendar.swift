@@ -64,6 +64,7 @@ public struct CustomCalendar: View {
                 if clearData {
                     manager.selectedDate = nil
                     manager.startDate = nil
+                    manager.endDate = nil
                     manager.selectedDates = []
                     shouldClearData = false
                 }
