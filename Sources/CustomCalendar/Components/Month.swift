@@ -41,6 +41,9 @@ struct Month: View {
             }
         }
         .background(manager.colors.backgroundColor)
+        .onChange(of: manager.selectedDates) { _ in
+            if manager.selectedDates.isEmpty { isStartDate = true }
+        }
     }
 }
 
