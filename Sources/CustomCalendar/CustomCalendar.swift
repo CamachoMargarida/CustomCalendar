@@ -62,7 +62,7 @@ public struct CustomCalendar: View {
             }
             .onChange(of: shouldClearData) { clearData in
                 if clearData {
-                    manager.selectedDates.removeAll()
+                    manager.selectedDates = []
                     shouldClearData = false
                 }
             }
