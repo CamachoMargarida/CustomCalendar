@@ -12,16 +12,18 @@ public struct CustomCalendar: View {
     @Binding var currentDate: Date
     @Binding var selectedDates: [Date]
     @Binding var eventList: [Event]
+    @Binding var shouldClearData: Bool
     
     private var enableHorizontalScroll: Bool
     
-    public init(monthOffset: Binding<Int>, isPickerPresented: Binding<Bool>, isLoading: Binding<Bool>, currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne, enableHorizontalScroll: Bool = false) {
+    public init(monthOffset: Binding<Int>, isPickerPresented: Binding<Bool>, isLoading: Binding<Bool>, shouldClearData: Binding<Bool> = .constant(false), currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne, enableHorizontalScroll: Bool = false) {
         _monthOffset = monthOffset
         _isPickerPresented = isPickerPresented
         _currentDate = currentDate
         _selectedDates = selectedDates
         _eventList = eventList
         _isLoading = isLoading
+        _shouldClearData = shouldClearData
         
         _manager = StateObject(wrappedValue: CalenderManager(
             colors: colors,
@@ -58,6 +60,9 @@ public struct CustomCalendar: View {
             .onChange(of: manager.selectedDates) { newList in
                 selectedDates = newList
             }
+            .onChange(of: shouldClearData) { clearData in
+                if clearData { manager.selectedDates.removeAll() }
+            }
         }
         .background(manager.colors.backgroundColor)
         .gesture(enableHorizontalScroll ? drag : nil)
@@ -85,18 +90,6 @@ public struct CustomCalendar: View {
     }
 }
 
-extension CustomCalendar {
-    public func clearSelectedDates() {
-        manager.clearSelectedDates()
-    }
-}
-
-extension CalenderManager {
-    public func clearSelectedDates() {
-        self.selectedDates.removeAll()
-    }
-}
-
 #Preview {
-    CustomCalendar(monthOffset: .constant(0), isPickerPresented: .constant(false), isLoading: .constant(true), currentDate: .constant(Date()), selectedDates: .constant([]), eventList: .constant([]))
+    CustomCalendar(monthOffset: .constant(0), isPickerPresented: .constant(false), isLoading: .constant(true), shouldClearData: .constant(true), currentDate: .constant(Date()), selectedDates: .constant([]), eventList: .constant([]))
 }
