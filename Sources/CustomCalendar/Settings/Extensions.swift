@@ -173,7 +173,11 @@ extension Month {
         return rowArray
     }
 
-    func partialMonthArray(from startDate: Date, to endDate: Date) -> [[Date]] {
+    func partialMonthArray(from startDate: Date?, to endDate: Date?) -> [[Date]] {
+        guard
+            let startDate = startDate,
+            let endDate = endDate else { return []}
+        
         var weeks = [[Date]]()
         var currentWeek: [Date] = Array(repeating: Date.distantPast, count: daysPerWeek)
         let calendar = manager.calendar
