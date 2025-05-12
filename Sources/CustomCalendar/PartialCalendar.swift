@@ -37,29 +37,3 @@ public struct PartialCalendar: View {
         }
     }
 }
-
-#Preview {
-    PartialCalendar(
-        selectedDates: .constant(datesBetween(start: "2025-05-07", end: "2025-05-12")),
-    )
-}
-
-func datesBetween(start: String, end: String, format: String = "yyyy-MM-dd") -> [Date] {
-    let formatter = DateFormatter()
-    formatter.dateFormat = format
-    formatter.timeZone = .current
-    
-    guard let startDate = formatter.date(from: start),
-          let endDate = formatter.date(from: end) else { return [] }
-    
-    var dates: [Date] = []
-    var current = Calendar.current.startOfDay(for: startDate)
-    let endDay = Calendar.current.startOfDay(for: endDate)
-
-    while current <= endDay {
-        dates.append(current)
-        current = Calendar.current.date(byAdding: .day, value: 1, to: current)!
-    }
-
-    return dates
-}
