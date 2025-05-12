@@ -133,4 +133,13 @@ class CalenderManager: ObservableObject {
             }
         }
     }
+    
+    func toggleDateSelection(_ date: Date) {
+        if let index = selectedDates.firstIndex(where: { calendar.isDate($0, inSameDayAs: date) }) {
+            selectedDates.remove(at: index)
+        } else {
+            selectedDates.append(date)
+            selectedDates.sort { $0 < $1 }
+        }
+    }
 }

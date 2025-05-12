@@ -235,9 +235,7 @@ extension Month {
                     cellSize: manager.cellSize
                 )
                 .onTapGesture {
-                    if let index = manager.selectedDates.firstIndex(where: { manager.calendar.isDate($0, inSameDayAs: date) }) {
-                        manager.selectedDates.remove(at: index)
-                    }
+                    manager.toggleDateSelection(date)
                 }
             }
             else if isThisMonth(date: date) {
