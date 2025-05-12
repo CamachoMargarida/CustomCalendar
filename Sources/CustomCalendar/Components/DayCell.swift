@@ -11,21 +11,8 @@ struct DayCell: View {
     var cellSize: CGFloat
     
     var body: some View {
-        if calendarDate.manager.calendarType == .calendarOne {
-            let event = calendarDate.events.first
-            
-            Text(calendarDate.getText())
-                .frame(width: cellSize, height: cellSize)
-                .foregroundStyle(event?.style.textColor ?? calendarDate.getTextColor())
-                .font(calendarDate.font)
-                .background(event?.style.backgroundColor ?? calendarDate.getBackColor())
-                .clipShape(calendarDate.getBorderShape())
-                .overlay {
-                    event?.style.borderStyle
-                }
-                .frame(maxWidth: .infinity, alignment: .center)
-        }
-        else {
+        switch calendarDate.manager.calendarType {
+        case .calendarTwo:
             VStack(spacing: 0) {
                 Divider()
                 
@@ -58,6 +45,19 @@ struct DayCell: View {
 
             }
             .frame(height: cellSize * 1.8)
+        default:
+            let event = calendarDate.events.first
+            
+            Text(calendarDate.getText())
+                .frame(width: cellSize, height: cellSize)
+                .foregroundStyle(event?.style.textColor ?? calendarDate.getTextColor())
+                .font(calendarDate.font)
+                .background(event?.style.backgroundColor ?? calendarDate.getBackColor())
+                .clipShape(calendarDate.getBorderShape())
+                .overlay {
+                    event?.style.borderStyle
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
         }
     }
 }

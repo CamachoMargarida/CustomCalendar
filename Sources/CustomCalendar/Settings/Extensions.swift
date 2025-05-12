@@ -174,20 +174,21 @@ extension Month {
     }
     
     func partialMonthArray() -> [[Date]] {
-            var rowArray = [[Date]]()
-            var columnArray = [Date]()
+        var weeks = [[Date]]()
+        var currentWeek: [Date] = Array(repeating: Date.distantPast, count: daysPerWeek)
+        
+        for date in manager.selectedDates {
+            let weekday = manager.calendar.component(.weekday, from: date)
+            currentWeek[weekday] = date
             
-            for (index, date) in manager.selectedDates.enumerated() {
-                columnArray.append(date)
-                
-                if (columnArray.count == daysPerWeek) || (index == manager.selectedDates.count - 1) {
-                    rowArray.append(columnArray)
-                    columnArray = []
-                }
+            if (weekday == daysPerWeek) || (date == manager.selectedDates.last) {
+                weeks.append(currentWeek)
+                currentWeek = Array(repeating: Date.distantPast, count: daysPerWeek)
             }
-            
-            return rowArray
         }
+        
+        return weeks
+    }
     
     func getMonthHeader() -> String {
         Settings.getMonthHeader(date: firstOfMonthOffset())
@@ -195,9 +196,26 @@ extension Month {
     
     func cellView(_ date: Date) -> some View {
         HStack(spacing: 0) {
-            if isThisMonth(date: date) {
-                switch manager.calendarType {
-                case .calendarOne:
+            if (manager.calendarType == .partialCalendar) && (date != Date.distantPast) {
+                DayCell(
+                    calendarDate: CalendarDate(
+                        date: date,
+                        manager: manager,
+                        isBetween: isBetweenDate(date: date),
+                        isWeekend: isWeekendDate(date: date),
+                        endDate: manager.endDate,
+                        startDate: manager.startDate,
+                    ),
+                    cellSize: manager.cellSize
+                )
+                .onTapGesture {
+                    if let index = manager.selectedDates.firstIndex(where: { manager.calendar.isDate($0, inSameDayAs: date) }) {
+                        manager.selectedDates.remove(at: index)
+                    }
+                }
+            }
+            else if isThisMonth(date: date) {
+                if manager.calendarType == .calendarOne {
                     DayCell(
                         calendarDate: CalendarDate(
                             date: date,
@@ -216,7 +234,8 @@ extension Month {
                     .onTapGesture {
                         dateTapped(date: date)
                     }
-                case .calendarTwo:
+                }
+                else {
                     DayCell(
                         calendarDate: CalendarDate(
                             date: date,
@@ -227,26 +246,8 @@ extension Month {
                         ),
                         cellSize: manager.cellSize
                     )
-                case .partialCalendar:
-                    DayCell(
-                        calendarDate: CalendarDate(
-                            date: date,
-                            manager: manager,
-                            isBetween: isBetweenDate(date: date),
-                            isWeekend: isWeekendDate(date: date),
-                            endDate: manager.endDate,
-                            startDate: manager.startDate,
-                        ),
-                        cellSize: manager.cellSize
-                    )
-                    .onTapGesture {
-                        if let index = manager.selectedDates.firstIndex(where: { manager.calendar.isDate($0, inSameDayAs: date) }) {
-                            manager.selectedDates.remove(at: index)
-                        }
-                    }
                 }
             }
-            
             else {
                 Text("")
                     .frame(maxWidth: .infinity, alignment: .center)
