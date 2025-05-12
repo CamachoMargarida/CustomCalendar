@@ -107,6 +107,10 @@ extension Month {
         return formatAndCompareDate(date: date, referenceDate: manager.selectedDate ?? Date())
     }
     
+    func isPartialSelectedDate(date: Date) -> Bool {
+        return manager.selectedDates.contains { manager.calendar.isDate($0, inSameDayAs: date) }
+    }
+    
     func isSpecialDate(date: Date) -> Bool {
         return isSelectedDate(date: date) || isStartDate(date: date) || isEndDate(date: date)
         
@@ -222,7 +226,7 @@ extension Month {
                     calendarDate: CalendarDate(
                         date: date,
                         manager: manager,
-                        isSelected: isSelectedDate(date: date),
+                        isSelected: isPartialSelectedDate(date: date),
                         isBetween: isBetweenDate(date: date),
                         isWeekend: isWeekendDate(date: date),
                         endDate: manager.endDate,
