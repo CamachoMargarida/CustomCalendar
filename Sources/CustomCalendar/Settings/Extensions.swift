@@ -173,6 +173,22 @@ extension Month {
         return rowArray
     }
     
+    func partialMonthArray() -> [[Date]] {
+            var rowArray = [[Date]]()
+            var columnArray = [Date]()
+            
+            for (index, date) in manager.selectedDates.enumerated() {
+                columnArray.append(date)
+                
+                if (columnArray.count == daysPerWeek) || (index == manager.selectedDates.count - 1) {
+                    rowArray.append(columnArray)
+                    columnArray = []
+                }
+            }
+            
+            return rowArray
+        }
+    
     func getMonthHeader() -> String {
         Settings.getMonthHeader(date: firstOfMonthOffset())
     }
@@ -180,7 +196,8 @@ extension Month {
     func cellView(_ date: Date) -> some View {
         HStack(spacing: 0) {
             if isThisMonth(date: date) {
-                if manager.calendarType == .calendarOne {
+                switch manager.calendarType {
+                case .calendarOne:
                     DayCell(
                         calendarDate: CalendarDate(
                             date: date,
@@ -199,8 +216,7 @@ extension Month {
                     .onTapGesture {
                         dateTapped(date: date)
                     }
-                }
-                else {
+                case .calendarTwo:
                     DayCell(
                         calendarDate: CalendarDate(
                             date: date,
@@ -211,6 +227,23 @@ extension Month {
                         ),
                         cellSize: manager.cellSize
                     )
+                case .partialCalendar:
+                    DayCell(
+                        calendarDate: CalendarDate(
+                            date: date,
+                            manager: manager,
+                            isBetween: isBetweenDate(date: date),
+                            isWeekend: isWeekendDate(date: date),
+                            endDate: manager.endDate,
+                            startDate: manager.startDate,
+                        ),
+                        cellSize: manager.cellSize
+                    )
+                    .onTapGesture {
+                        if let index = manager.selectedDates.firstIndex(where: { manager.calendar.isDate($0, inSameDayAs: date) }) {
+                            manager.selectedDates.remove(at: index)
+                        }
+                    }
                 }
             }
             
