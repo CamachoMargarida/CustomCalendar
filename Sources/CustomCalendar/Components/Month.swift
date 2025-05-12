@@ -17,7 +17,7 @@ struct Month: View {
     let calendarUnitYMD = Set<Calendar.Component>([.year, .month, .day])
     
     var monthsArray: [[Date]] {
-        manager.calendarType == .partialCalendar ? partialMonthArray() : monthArray()
+        manager.calendarType == .partialCalendar ? partialMonthArray(from: manager.selectedDates.first!, to: manager.selectedDates.last!) : monthArray()
     }
     
     var body: some View {

@@ -172,21 +172,38 @@ extension Month {
         
         return rowArray
     }
-    
-    func partialMonthArray() -> [[Date]] {
+
+    func partialMonthArray(from startDate: Date, to endDate: Date) -> [[Date]] {
         var weeks = [[Date]]()
         var currentWeek: [Date] = Array(repeating: Date.distantPast, count: daysPerWeek)
-        
-        for date in manager.selectedDates {
-            let weekday = manager.calendar.component(.weekday, from: date)
-            currentWeek[weekday] = date
-            
-            if (weekday == daysPerWeek) || (date == manager.selectedDates.last) {
+        let calendar = manager.calendar
+
+        var current = startDate
+        let endDay = calendar.startOfDay(for: endDate)
+
+        // Descobre o índice de início da primeira data
+        let startWeekday = calendar.component(.weekday, from: current)
+        let startIndex = (startWeekday - calendar.firstWeekday + daysPerWeek) % daysPerWeek
+        var indexInWeek = startIndex
+
+        while current <= endDay {
+            currentWeek[indexInWeek] = current
+
+            indexInWeek += 1
+            if indexInWeek == daysPerWeek {
                 weeks.append(currentWeek)
                 currentWeek = Array(repeating: Date.distantPast, count: daysPerWeek)
+                indexInWeek = 0
             }
+
+            current = calendar.date(byAdding: .day, value: 1, to: current)!
         }
-        
+
+        // Adiciona a última semana incompleta, se necessário
+        if currentWeek.contains(where: { $0 != Date.distantPast }) {
+            weeks.append(currentWeek)
+        }
+
         return weeks
     }
     
@@ -201,6 +218,7 @@ extension Month {
                     calendarDate: CalendarDate(
                         date: date,
                         manager: manager,
+                        isSelected: isSelectedDate(date: date),
                         isBetween: isBetweenDate(date: date),
                         isWeekend: isWeekendDate(date: date),
                         endDate: manager.endDate,
