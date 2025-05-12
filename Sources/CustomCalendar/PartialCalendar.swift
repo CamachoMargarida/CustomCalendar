@@ -32,6 +32,9 @@ public struct PartialCalendar: View {
         .onChange(of: manager.selectedDates) { newList in
             selectedDates = newList
         }
+        .onChange(of: selectedDates) { newDates in
+            manager.selectedDates = newDates
+        }
     }
 }
 
