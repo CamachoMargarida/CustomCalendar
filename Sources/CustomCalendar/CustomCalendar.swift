@@ -41,9 +41,7 @@ public struct CustomCalendar: View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
                 
-                if manager.calendarType != .partialCalendar {
-                    MonthHeader(manager: manager, monthOffset: $monthOffset, isPickerPresented: $isPickerPresented)
-                }
+                MonthHeader(manager: manager, monthOffset: $monthOffset, isPickerPresented: $isPickerPresented)
                 
                 Weekday(manager: manager)
                 
