@@ -17,7 +17,8 @@ public struct PartialCalendar: View {
         
         _manager = StateObject(wrappedValue: CalenderManager(
             colors: colors,
-            calendar: Calendar.current
+            calendar: Calendar.current,
+            calendarType: .partialCalendar
         ))
     }
     
