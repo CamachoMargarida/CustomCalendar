@@ -195,16 +195,20 @@ extension Month {
         var indexInWeek = startIndex
 
         while current <= endDay {
-            currentWeek[indexInWeek] = current
+            let weekday = calendar.component(.weekday, from: current)
+            
+            if (weekday != 1) && (weekday != daysPerWeek) {
+                currentWeek[indexInWeek] = current
 
-            indexInWeek += 1
-            if indexInWeek == daysPerWeek {
-                weeks.append(currentWeek)
-                currentWeek = Array(repeating: Date.distantPast, count: daysPerWeek)
-                indexInWeek = 0
+                indexInWeek += 1
+                if indexInWeek == daysPerWeek {
+                    weeks.append(currentWeek)
+                    currentWeek = Array(repeating: Date.distantPast, count: daysPerWeek)
+                    indexInWeek = 0
+                }
+
+                current = calendar.date(byAdding: .day, value: 1, to: current)!
             }
-
-            current = calendar.date(byAdding: .day, value: 1, to: current)!
         }
 
         // Adiciona a última semana incompleta, se necessário
