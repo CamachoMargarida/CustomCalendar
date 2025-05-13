@@ -12,12 +12,13 @@ public struct PartialCalendar: View {
     
     @Binding var selectedDates: [Date]
     
-    public init(selectedDates: Binding<[Date]>, colors: Colors = Colors()) {
+    public init(selectedDates: Binding<[Date]>, colors: Colors = Colors(), startDate: Date, endDate: Date) {
         _selectedDates = selectedDates
         
         _manager = StateObject(wrappedValue: CalenderManager(
+            startDate: startDate,
+            endDate: endDate,
             colors: colors,
-            calendar: Calendar.current,
             calendarType: .partialCalendar
         ))
     }

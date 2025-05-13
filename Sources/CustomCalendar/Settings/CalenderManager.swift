@@ -17,12 +17,12 @@ class CalenderManager: ObservableObject {
     
     @Published var startDate: Date? = nil {
         didSet {
-            updateSelectedDates()
+            if calendarType != .partialCalendar { updateSelectedDates() }
         }
     }
     @Published var endDate: Date? = nil {
         didSet {
-            updateSelectedDates()
+            if calendarType != .partialCalendar { updateSelectedDates() }
         }
     }
     
