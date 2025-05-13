@@ -197,15 +197,13 @@ extension Month {
         while current <= endDay {
             let weekday = calendar.component(.weekday, from: current)
             
-            if (weekday != 1) && (weekday != daysPerWeek) {
-                currentWeek[indexInWeek] = current
-                indexInWeek += 1
-                
-                if indexInWeek == daysPerWeek {
-                    weeks.append(currentWeek)
-                    currentWeek = Array(repeating: Date.distantPast, count: daysPerWeek)
-                    indexInWeek = 0
-                }
+            currentWeek[indexInWeek] = ((weekday != 1) && (weekday != daysPerWeek)) ? current : Date.distantPast
+            indexInWeek += 1
+            
+            if indexInWeek == daysPerWeek {
+                weeks.append(currentWeek)
+                currentWeek = Array(repeating: Date.distantPast, count: daysPerWeek)
+                indexInWeek = 0
             }
             
             current = calendar.date(byAdding: .day, value: 1, to: current)!
