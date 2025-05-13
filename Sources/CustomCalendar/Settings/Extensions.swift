@@ -227,6 +227,8 @@ extension Month {
                         date: date,
                         manager: manager,
                         isSelected: isPartialSelectedDate(date: date),
+                        isBetween: isBetweenDate(date: date),
+                        isWeekend: isWeekendDate(date: date),
                         endDate: manager.endDate,
                         startDate: manager.startDate,
                     ),
