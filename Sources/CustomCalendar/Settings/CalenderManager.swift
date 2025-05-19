@@ -26,7 +26,7 @@ class CalenderManager: ObservableObject {
         }
     }
     
-    public var calendarType: CalendarType
+    public var tapDelegate: CalendarTapDelegate?
     
     var calendar = Calendar.current
     var minimumDate = Date()
@@ -34,7 +34,7 @@ class CalenderManager: ObservableObject {
     var disabledAfterDate: Date?
     var fonts = Fonts()
     var currentDate: Date
-    var tapDelegate: CalendarTapDelegate?
+    var calendarType: CalendarType
     
     init(selectedDate: Date? = nil, startDate: Date? = nil, endDate: Date? = nil, colors: Colors = Colors(), calendar: Foundation.Calendar = Calendar.current, minimumDate: Date = Date(), maximumDate: Date = Date(), disabledAfterDate: Date? = nil, disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne) {
         self.selectedDate = selectedDate

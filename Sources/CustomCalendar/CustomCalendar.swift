@@ -25,17 +25,18 @@ public struct CustomCalendar: View {
         _isLoading = isLoading
         _shouldClearData = shouldClearData
         
-        _manager = StateObject(wrappedValue: CalenderManager(
+        let manager = CalenderManager(
             colors: colors,
             calendar: Calendar.current,
             minimumDate: Date(),
             maximumDate: Calendar.current.date(byAdding: .month, value: 2, to: Date())!,
             disableBeforeTodayDates: disableBeforeTodayDates,
             calendarType: calendarType
-        ))
+        )
+        manager.tapDelegate = CalendarTapHandler(onTap: onTap)
+        _manager = StateObject(wrappedValue: manager)
         
         self.enableHorizontalScroll = enableHorizontalScroll
-        self.manager.tapDelegate = CalendarTapHandler(onTap: onTap)
     }
     
     public var body: some View {

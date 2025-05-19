@@ -15,12 +15,13 @@ public struct PartialCalendar: View {
     public init(selectedDates: Binding<[Date]>, colors: Colors = Colors(), startDate: Date, endDate: Date) {
         _selectedDates = selectedDates
         
-        _manager = StateObject(wrappedValue: CalenderManager(
+        let manager = CalenderManager(
             startDate: startDate,
             endDate: endDate,
             colors: colors,
             calendarType: .partialCalendar
-        ))
+        )
+        _manager = StateObject(wrappedValue: manager)
     }
     
     public var body: some View {
