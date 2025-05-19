@@ -16,7 +16,7 @@ struct Weekday: View {
             ForEach(weekdays, id: \.self) { weekday in
                 Text(weekday)
                     .font(manager.fonts.regularTextFont)
-                    .frame(width: .infinity, alignment: .center)
+                    .frame(maxWidth: .infinity, alignment: .center)
             }
             .foregroundStyle(manager.colors.weekdayTextColor)
             .background(manager.colors.backgroundColor)
