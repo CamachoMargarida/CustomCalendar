@@ -16,7 +16,7 @@ public struct CustomCalendar: View {
     
     private var enableHorizontalScroll: Bool
     
-    public init(monthOffset: Binding<Int>, isPickerPresented: Binding<Bool>, isLoading: Binding<Bool>, shouldClearData: Binding<Bool> = .constant(false), currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne, enableHorizontalScroll: Bool = false) {
+    public init(monthOffset: Binding<Int>, isPickerPresented: Binding<Bool>, isLoading: Binding<Bool>, shouldClearData: Binding<Bool> = .constant(false), currentDate: Binding<Date>, selectedDates: Binding<[Date]>, eventList: Binding<[Event]>, colors: Colors = Colors(), disableBeforeTodayDates: Bool = true, calendarType: CalendarType = .calendarOne, enableHorizontalScroll: Bool = false, onTap: ((Date) -> Void)? = nil) {
         _monthOffset = monthOffset
         _isPickerPresented = isPickerPresented
         _currentDate = currentDate
@@ -35,6 +35,7 @@ public struct CustomCalendar: View {
         ))
         
         self.enableHorizontalScroll = enableHorizontalScroll
+        self.manager.tapDelegate = CalendarTapHandler(onTap: onTap)
     }
     
     public var body: some View {
@@ -90,6 +91,18 @@ public struct CustomCalendar: View {
                     }
                 }
             }
+    }
+}
+
+class CalendarTapHandler: CalendarTapDelegate {
+    var onTap: ((Date) -> Void)?
+    
+    init(onTap: ((Date) -> Void)? = nil) {
+        self.onTap = onTap
+    }
+    
+    func didTapDate(_ date: Date) {
+        onTap?(date)
     }
 }
 

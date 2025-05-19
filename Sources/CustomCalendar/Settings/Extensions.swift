@@ -257,6 +257,7 @@ extension Month {
                     )
                     .onTapGesture {
                         dateTapped(date: date)
+                        manager.tapDelegate?.didTapDate(date)
                     }
                 }
                 else {

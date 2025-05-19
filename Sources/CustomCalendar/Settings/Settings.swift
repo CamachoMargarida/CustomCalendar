@@ -60,3 +60,7 @@ class Settings {
         return AnyShape(RoundedRectangle(cornerRadius: 8))
     }
 }
+
+protocol CalendarTapDelegate {
+    func didTapDate(_ date: Date)
+}
